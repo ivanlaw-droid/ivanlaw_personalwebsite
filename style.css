@@ -1,8 +1,90 @@
+html{background-color:white;
+    scroll-behavior: smooth;
+
+}
+
+
+
 *{ 
     color:blue;/*a comment */
     margin: 10px;
     font: 14px Tahoma;
     background-color: wheat;
+}
+
+h1, h2, h3{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicod'
+}
+
+header, section{
+    margin:2em auto;
+    width: min(75em, 100%);
+    background-color: antiquewhite;
+    padding: min(2em, 15%);
+    border-radius: 1em;
+}
+
+nav{
+    margin: 1em auto 1em auto;
+    width: min(1000px, 100%);
+    font-size: 1.5em;
+}
+
+nav ul{
+ display: flex;
+ align-items: center;
+ list-style-type: none;
+ gap: 2em;
+}
+
+nav p:first-child{
+    margin-right: auto;
+    font-size: 1.5em;
+}
+
+.intro_button{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color:lightsalmon;
+    padding: .75em 1em;
+    margin-top: 0em;
+    border-radius: .5em;
+    font-weight: 600; 
+}
+
+.intro_button{
+    display: inline-block;
+    text-decoration: none;
+    color:white;
+    background-color:lightsalmon;
+    padding: .75em 1em;
+    margin-top: 0em;
+    border-radius: .5em;
+    font-weight: 600;
+}
+
+.flex-container{
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 3em;
+}
+
+header img{
+ max-width: 100%;
+ border-radius: 1em;
+ object-fit: cover;
+ object-position: bottom;
+}
+
+.text-container{
+    flex: 0 1 40em;
+}
+
+h1{
+    font-size: 2em;
 }
 
 button{
