@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Personal Network Visualization</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      text-align: center;
+    }
+    svg {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+    }
+    table {
+      margin: 30px auto;
+      border-collapse: collapse;
+    }
+    td, th {
+      border: 1px solid #999;
+      padding: 5px 10px;
+      text-align: center;
+    }
+    .node circle {
+      stroke: #333;
+      stroke-width: 1.5px;
+    }
+    .link {
+      stroke: #aaa;
+      stroke-opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>My Personal Network</h1>
+  <p>This network shows relationships between my skills, interests, and goals.</p>
+
+  <!-- SVG for Node-Link Graph -->
+  <svg id="networkGraph" width="800" height="500"></svg>
+
+  <!-- Table for Adjacency Matrix -->
+  <h2>Adjacency Matrix</h2>
+  <div id="matrix"></div>
+
+  <script src="network.js"></script>
+</body>
+</html>
