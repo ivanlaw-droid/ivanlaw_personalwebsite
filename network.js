@@ -1,4 +1,3 @@
-// === Activity 1: Define Graph Dataset ===
 const graph = {
   nodes: [
     { id: "Ivan", group: "self" },
@@ -21,7 +20,6 @@ const graph = {
   ]
 };
 
-// === Activity 2: Force-Directed Layout ===
 const svg = d3.select("#networkGraph");
 const width = +svg.attr("width");
 const height = +svg.attr("height");
@@ -97,7 +95,7 @@ function dragended(event) {
   event.subject.fy = null;
 }
 
-// === Activity 3: Adjacency Matrix ===
+
 const nodes = graph.nodes.map(d => d.id);
 const matrix = [];
 
