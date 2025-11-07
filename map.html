@@ -1,0 +1,37 @@
+<html lang="en">
+    <head>
+     <meta charset="UTF-8">
+     <title>My Travel and Visitor Map</title>
+     <script src="https://d3js.org/d3.v7.min.js"></script>
+     <style>
+        body{
+         font-family: Arial, sans-serif;
+         background-color:#f6f8fa;
+         text-align: center;
+        }
+        svg{
+           bsckground-color: #dfe9ff;
+           border: 1px solid #aaa;
+           margin-top: 20px; 
+        }
+        .city-dot {
+            fill:#2575fc;
+            stroke:white;
+            stroke-width: 0.8;
+        }
+        .xisitor-symbol{
+            fill: rgba(255, 0, 0, 0.6);
+            stroke:white;
+            stroke-width: 1;
+        }
+     </style>
+    </head>
+    <body>
+        <h1>My Travel & Visitor Map</h1>
+        <p>Blue dots show places I have visited, and red circles show simulated website visitiors.</p>
+
+        <svg id="map" width="900" height="500"></svg>
+
+        <script src="map.js"></script>
+    </body>
+    </html>
