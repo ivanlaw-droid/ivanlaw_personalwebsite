@@ -64,27 +64,33 @@ d3.json(worldGeoJSON)
    
     const home = places.find(function (d) { return d.type === "home"; });
 
-    const routesGroup = svg.append("g")
-      .attr("fill", "none")
-      .attr("stroke-linecap", "round");
+const routesGroup = svg.append("g")
+  .attr("fill", "none")
+  .attr("stroke-linecap", "round");
 
-    const routes = routesGroup.selectAll("path")
-      .data(places.filter(function (d) { return d.type !== "home"; }))
-      .enter()
-      .append("path")
-      .attr("d", function (d) {
-        return path({
-          type: "LineString",
-          coordinates: [
-            [home.lon, home.lat],
-            [d.lon, d.lat]
-          ]
-        });
-      })
-      .attr("stroke", "rgba(148,163,184,0.75)")
-      .attr("stroke-width", 1.4)
-      .attr("stroke-dasharray", "4 6")
-      .attr("opacity", 0); 
+const routes = routesGroup.selectAll("path")
+  .data(places.filter(function (d) { return d.type !== "home"; }))
+  .enter()
+  .append("path")
+  .attr("d", function (d) {
+    return path({
+      type: "LineString",
+      coordinates: [
+        [home.lon, home.lat],
+        [d.lon, d.lat]
+      ]
+    });
+  })
+  .attr("stroke", "rgba(148,163,184,0.8)")
+  .attr("stroke-width", 1.4)
+  .attr("opacity", 1) 
+  .attr("stroke-dasharray", function () {
+    var length = this.getTotalLength();
+    return length + " " + length;  
+  })
+  .attr("stroke-dashoffset", function () {
+    return this.getTotalLength();  
+  });
 
    
     const pointGroup = svg.append("g");
@@ -116,13 +122,16 @@ d3.json(worldGeoJSON)
       }
     });
 
-    function animateRoutes() {
-      routes
-        .transition()
-        .delay(function (d, i) { return 150 + i * 150; })
-        .duration(700)
-        .attr("opacity", 1);
-    }
+function animateRoutes() {
+  routes
+    .transition()
+    .delay(function (d, i) {
+    
+      return 300 + i * 600;
+    })
+    .duration(3200)  
+    .ease(d3.easeCubicOut)
+    .attr("stroke-dashoffset", 0); 
 
   
     points.append("title")
