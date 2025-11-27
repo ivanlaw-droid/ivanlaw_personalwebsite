@@ -41,7 +41,7 @@ d3.json(worldGeoJSON)
   .then(function (world) {
     const countries = world.features;
 
-    
+  
     svg.append("g")
       .selectAll("path")
       .data(countries)
@@ -52,7 +52,7 @@ d3.json(worldGeoJSON)
       .attr("stroke", "#d1bfae")
       .attr("stroke-width", 0.5);
 
-    
+  
     const graticule = d3.geoGraticule();
     svg.append("path")
       .datum(graticule())
@@ -61,14 +61,14 @@ d3.json(worldGeoJSON)
       .attr("stroke", "rgba(148, 163, 184, 0.35)")
       .attr("stroke-width", 0.4);
 
-  
+   
     const home = places.find(function (d) { return d.type === "home"; });
 
     const routesGroup = svg.append("g")
       .attr("fill", "none")
       .attr("stroke-linecap", "round");
 
-    routesGroup.selectAll("path")
+    const routes = routesGroup.selectAll("path")
       .data(places.filter(function (d) { return d.type !== "home"; }))
       .enter()
       .append("path")
@@ -84,13 +84,9 @@ d3.json(worldGeoJSON)
       .attr("stroke", "rgba(148,163,184,0.75)")
       .attr("stroke-width", 1.4)
       .attr("stroke-dasharray", "4 6")
-      .attr("opacity", 0)
-      .transition()
-      .delay(function (d, i) { return 300 + i * 150; })
-      .duration(700)
-      .attr("opacity", 1);
+      .attr("opacity", 0); 
 
-    
+   
     const pointGroup = svg.append("g");
 
     const points = pointGroup.selectAll("circle.city")
@@ -106,17 +102,33 @@ d3.json(worldGeoJSON)
       .attr("stroke-width", 1.2)
       .attr("opacity", 0.96);
 
-  
-    points.transition()
+   
+    const pointTransition = points.transition()
       .delay(function (d, i) { return 200 + i * 120; })
       .duration(600)
       .attr("r", 5);
 
    
+    pointTransition.on("end", function (_, i, nodes) {
+
+      if (i === nodes.length - 1) {
+        animateRoutes();
+      }
+    });
+
+    function animateRoutes() {
+      routes
+        .transition()
+        .delay(function (d, i) { return 150 + i * 150; })
+        .duration(700)
+        .attr("opacity", 1);
+    }
+
+  
     points.append("title")
       .text(function (d) { return d.name + ", " + d.country; });
 
-    
+  
     const homePos = projection([home.lon, home.lat]);
 
     const pulseCircle = pointGroup.append("circle")
