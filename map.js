@@ -17,30 +17,6 @@ const projection = d3.geoMercator()
 const path = d3.geoPath().projection(projection);
 
 
-svg.append("rect")
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr("width", width)
-  .attr("height", height)
-  .attr("fill", "url(#oceanGradient)");
-
-
-const defs = svg.append("defs");
-const oceanGradient = defs.append("linearGradient")
-  .attr("id", "oceanGradient")
-  .attr("x1", "0%")
-  .attr("x2", "0%")
-  .attr("y1", "0%")
-  .attr("y2", "100%");
-
-oceanGradient.append("stop")
-  .attr("offset", "0%")
-  .attr("stop-color", "#e0f2fe");
-oceanGradient.append("stop")
-  .attr("offset", "100%")
-  .attr("stop-color", "#dbeafe");
-
-
 const places = [
   { name: "Hong Kong", country: "Hong Kong", lat: 22.3193, lon: 114.1694, type: "home" },
   { name: "Tokyo", country: "Japan", lat: 35.6762, lon: 139.6503, type: "travel" },
@@ -59,12 +35,12 @@ const typeColor = {
 };
 
 
-const worldURL = "https://unpkg.com/world-atlas@2.0.2/countries-110m.json";
+const worldURL = "https://unpkg.com/world-atlas@2/countries-110m.json";
 
 d3.json(worldURL).then(worldData => {
   const countries = topojson.feature(worldData, worldData.objects.countries).features;
 
-
+  
   svg.append("g")
     .selectAll("path")
     .data(countries)
@@ -74,13 +50,13 @@ d3.json(worldURL).then(worldData => {
     .attr("stroke", "#d1bfae")
     .attr("stroke-width", 0.5);
 
-
+  
   const graticule = d3.geoGraticule();
   svg.append("path")
     .datum(graticule())
     .attr("d", path)
     .attr("fill", "none")
-    .attr("stroke", "rgba(148, 163, 184, 0.4)")
+    .attr("stroke", "rgba(148, 163, 184, 0.35)")
     .attr("stroke-width", 0.4);
 
   
@@ -91,11 +67,11 @@ d3.json(worldURL).then(worldData => {
     .join("circle")
     .attr("cx", d => projection([d.lon, d.lat])[0])
     .attr("cy", d => projection([d.lon, d.lat])[1])
-    .attr("r", 0)
+    .attr("r", 0) 
     .attr("fill", d => typeColor[d.type])
     .attr("stroke", "white")
     .attr("stroke-width", 1.2)
-    .attr("opacity", 0.95);
+    .attr("opacity", 0.96);
 
   
   points.transition()

@@ -5,12 +5,7 @@
   <title>Travel Map • Ivan Law</title>
 
   
-  <link rel="stylesheet" href="style.css" />
-
-  
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/topojson-client@3"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     html, body {
       margin: 0;
@@ -37,7 +32,7 @@
 
     .logo {
       font-family: "Playfair Display", serif;
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 600;
       letter-spacing: 0.06em;
     }
@@ -50,31 +45,25 @@
       padding: 0;
     }
 
-    .main-nav a,
-    .main-nav button {
+    .main-nav a {
       border: none;
       background: none;
       font: inherit;
       cursor: pointer;
-      padding: 10px 20px;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      padding: 8px 16px;
       border-radius: 999px;
       color: #6b7280;
       transition: background 0.25s ease, color 0.25s ease, transform 0.18s ease;
       text-decoration: none;
     }
 
-    .main-nav a:hover,
-    .main-nav button:hover {
+    .main-nav a:hover {
       background: rgba(196, 91, 91, 0.09);
       color: #c45b5b;
       transform: translateY(-1px);
     }
 
-    
+  
     .page-shell {
       max-width: 1100px;
       margin: 32px auto 64px;
@@ -133,7 +122,6 @@
       height: 10px;
       border-radius: 999px;
     }
-
     .legend-home { background: #c45b5b; }
     .legend-travel { background: #3485e2; }
     .legend-dream { background: #f5b940; }
@@ -152,12 +140,18 @@
       }
     }
   </style>
+
+ 
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
 </head>
 
 <body>
-  <!-- NAV -->
+  
   <nav class="main-nav">
-    <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a></div>
+    <div class="logo">
+      <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
+    </div>
     <ul>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#works">Works</a></li>
@@ -165,10 +159,10 @@
     </ul>
   </nav>
 
-  <!-- MAP CONTENT -->
+ 
   <main class="page-shell">
     <section class="map-card">
-      <h1 class="map-title">Cities I’ve visited & dream to film</h1>
+      <h1 class="map-title">Cities I’ve visited &amp; dream to film</h1>
       <p class="map-subtitle">Travel &amp; visitor map · places that shape my visual storytelling.</p>
 
       <div class="map-layout">
@@ -190,7 +184,7 @@
             </div>
             <div class="legend-item">
               <span class="legend-dot legend-travel"></span>
-              <span>Visited & photographed</span>
+              <span>Visited &amp; photographed</span>
             </div>
             <div class="legend-item">
               <span class="legend-dot legend-dream"></span>
@@ -200,6 +194,7 @@
         </div>
 
         <div>
+          
           <svg id="map" width="620" height="380"></svg>
         </div>
       </div>
