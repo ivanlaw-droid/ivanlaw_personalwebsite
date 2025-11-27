@@ -2,67 +2,210 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ivan Law • Travel & Visitor Map</title>
+  <title>Travel Map • Ivan Law</title>
 
-
-  <link href="style.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="style.css" />
 
   
   <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
 
   <style>
-    .page-title {
-      margin-bottom: 8px;
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
+      background: #f7f3ef;
     }
-    .page-subtitle {
-      color: #555;
-      line-height: 1.6;
-      max-width: 720px;
+
+    
+    .main-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 6vw;
+      background: rgba(247, 243, 239, 0.94);
+      border-bottom: 1px solid rgba(228, 215, 198, 0.7);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
-    #mapContainer {
-      margin-top: 24px;
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
     }
+
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-nav a,
+    .main-nav button {
+      border: none;
+      background: none;
+      font: inherit;
+      cursor: pointer;
+      padding: 10px 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      color: #6b7280;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.18s ease;
+      text-decoration: none;
+    }
+
+    .main-nav a:hover,
+    .main-nav button:hover {
+      background: rgba(196, 91, 91, 0.09);
+      color: #c45b5b;
+      transform: translateY(-1px);
+    }
+
+    
+    .page-shell {
+      max-width: 1100px;
+      margin: 32px auto 64px;
+      padding: 0 20px;
+    }
+
+    .map-card {
+      background: #fffaf6;
+      border-radius: 20px;
+      padding: 24px 24px 30px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .map-title {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      margin: 0 0 6px;
+      color: #1f2933;
+    }
+
+    .map-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 18px;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .map-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .map-legend {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .legend-home { background: #c45b5b; }
+    .legend-travel { background: #3485e2; }
+    .legend-dream { background: #f5b940; }
+
+    
     #map {
-      width: 100%;
-      height: 480px;
+      max-width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+      background: radial-gradient(circle at 50% 0, #dbeafe, #eff6ff 55%, #e5e7eb);
+    }
+
+    @media (max-width: 900px) {
+      .map-layout {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
- 
+  <!-- NAV -->
   <nav class="main-nav">
-    <div class="logo">Ivan Law</div>
+    <div class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a></div>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="timeline.html">Timeline</a></li>
-      <li><a href="my_work.html">Data View</a></li>
-      <li><a href="interactive3d.html">3D Space</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#works">Works</a></li>
+      <li><a href="index.html#cv">CV</a></li>
     </ul>
   </nav>
 
-  <div class="page-wrapper">
-    <section class="page-section">
-      <h1 class="page-title">🗺️ Travel & Visitor Map</h1>
-      <p class="page-subtitle">
-        This map marks places that I’ve visited and that inspire my visual work.
-        Each point can be linked to stories, photos or projects – turning travel
-        memories into a creative atlas.
-      </p>
+  <!-- MAP CONTENT -->
+  <main class="page-shell">
+    <section class="map-card">
+      <h1 class="map-title">Cities I’ve visited & dream to film</h1>
+      <p class="map-subtitle">Travel &amp; visitor map · places that shape my visual storytelling.</p>
 
-      <div id="mapContainer" class="chart-container">
-        <svg id="map" width="900" height="500"></svg>
+      <div class="map-layout">
+        <div class="map-text">
+          <p>
+            This map marks the cities that have inspired my photography and film work —
+            from everyday streets in Hong Kong to cathedrals in Europe and neighbourhoods
+            in Seoul and Tokyo.
+          </p>
+          <p>
+            Each dot is a potential story: some are places I call home, some are journeys
+            I’ve already made, and some are locations I hope to turn into future projects.
+          </p>
+
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="legend-dot legend-home"></span>
+              <span>Home base / lived&nbsp;in</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot legend-travel"></span>
+              <span>Visited & photographed</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot legend-dream"></span>
+              <span>Future project destination</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <svg id="map" width="620" height="380"></svg>
+        </div>
       </div>
     </section>
-  </div>
-
-  <footer class="site-footer">
-    © <span id="year"></span> Ivan Law · Visual Storyteller
-  </footer>
+  </main>
 
   <script src="map.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
