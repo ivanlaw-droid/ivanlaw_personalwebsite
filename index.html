@@ -4,71 +4,74 @@
   <meta charset="UTF-8" />
   <title>Ivan Law • Visual Storyteller</title>
 
-  
+  <!-- 仍然使用你的全站 style.css -->
   <link rel="stylesheet" href="style.css" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- 字體：日系感 + 優雅標題 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
-    <style>
-    /* ====== 背景：柔光藝術風（主變更） ====== */
+  <style>
+    :root {
+      --bg-main: #f7f3ef;          /* 和紙米色 */
+      --bg-card: #ffffff;
+      --ink: #1f2933;              /* 深墨色 */
+      --muted: #6b7280;            /* 淺灰文字 */
+      --accent-red: #c45b5b;       /* 暖赤紅 */
+      --accent-green: #2f4f4f;     /* 墨綠藍 */
+      --border-soft: #e4d7c6;
+      --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.08);
+      --radius-lg: 20px;
+    }
+
+    /* ===== 背景與整體排版 ===== */
     body {
       margin: 0;
-      font-family: "Montserrat", sans-serif;
-      background: radial-gradient(circle at top left, #f7f9ff 0%, #e8efff 40%, #dde7fa 100%);
-      background-attachment: fixed;
-      color: #222;
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,0.9), transparent 55%),
+        radial-gradient(circle at 100% 20%, rgba(233, 225, 215, 0.9), transparent 50%),
+        var(--bg-main);
+      color: var(--ink);
     }
 
-    /* Hero 區加入光暈背景 */
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(255,170,220,0.35), transparent 55%),
-        radial-gradient(circle at 80% 20%, rgba(180,220,255,0.35), transparent 60%),
-        radial-gradient(circle at 60% 75%, rgba(190,255,210,0.35), transparent 60%);
-      z-index: -1;
-      filter: blur(90px);
+    main {
+      padding: 40px 6vw 72px;
     }
 
-    /* 頁面容器 */
-    .site-header {
-      min-height: 90vh;
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    a {
+      color: inherit;
     }
 
-    /* Navigation */
+    /* ===== 導航列（日系簡約） ===== */
     .main-nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 40px;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+      padding: 16px 6vw;
+      background: rgba(247, 243, 239, 0.92);
+      border-bottom: 1px solid rgba(228, 215, 198, 0.7);
+      backdrop-filter: blur(14px);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
     .logo {
       font-family: "Playfair Display", serif;
       font-size: 26px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-weight: 600;
+      letter-spacing: 0.06em;
     }
 
-    /* Navigation Links */
     .main-nav ul {
-      display: flex;
       list-style: none;
-      gap: 20px;
-      padding: 0;
+      display: flex;
+      gap: 18px;
       margin: 0;
+      padding: 0;
     }
 
     .main-nav a,
@@ -76,163 +79,337 @@
       border: none;
       background: none;
       font: inherit;
-      color: #333;
       cursor: pointer;
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 10px;
-      transition: 0.25s ease;
+      padding: 6px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
     }
 
     .main-nav a:hover,
     .main-nav button:hover {
-      background: rgba(37,117,252,0.12);
-      color: #2575fc;
+      background: rgba(196, 91, 91, 0.09);
+      color: var(--accent-red);
+      transform: translateY(-1px);
     }
 
-    /* ======= Hero 內容區 ======= */
-    .hero {
+    /* ===== Hero 區（兩欄，清爽卡片） ===== */
+    .hero-wrapper {
+      margin-top: 32px;
       display: grid;
-      grid-template-columns: 1.1fr 1.2fr;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
       gap: 40px;
-      padding: 80px 8vw;
       align-items: center;
     }
 
-    .hero-text h1 {
+    .hero-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 28px 26px 30px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(196,91,91,0.08), transparent 55%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    h1.hero-title {
       font-family: "Playfair Display", serif;
-      font-size: 48px;
-      margin-bottom: 16px;
-      background: linear-gradient(90deg,#2a2d43,#4c5e91);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 38px;
+      line-height: 1.25;
+      margin: 0 0 14px;
     }
 
-    .hero-text .lead {
-      font-size: 17px;
-      color: #444;
+    .hero-sub {
+      font-size: 14px;
+      color: var(--muted);
       margin-bottom: 18px;
-      line-height: 1.7;
     }
 
-    .hero-badges {
+    .hero-copy {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 22px;
+    }
+
+    .hero-tags {
       display: flex;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-bottom: 20px;
     }
 
-    .badge {
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(8px);
-      padding: 6px 12px;
-      font-size: 13px;
-      border-radius: 8px;
-      color: #444;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    .tag {
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(47, 79, 79, 0.25);
+      color: var(--accent-green);
+      background: rgba(255,255,255,0.9);
     }
 
-    /* Hero 按鈕 */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .btn {
       display: inline-block;
-      padding: 14px 26px;
+      padding: 11px 22px;
       border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 600;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
-      transition: 0.25s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
     }
-    .btn:hover { transform: translateY(-3px); }
 
     .btn-primary {
-      background: linear-gradient(135deg,#a8c5ff 0%,#dce9ff 100%);
-      color: #233;
+      background: linear-gradient(135deg, #c45b5b, #e7b7a8);
+      color: #fffaf6;
+      box-shadow: 0 12px 30px rgba(196, 91, 91, 0.35);
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg,#e0c3fc 0%, #c2e9fb 100%);
-      color: #233;
+      background: transparent;
+      border: 1px solid rgba(47,79,79,0.45);
+      color: var(--accent-green);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
     }
 
-    /* Hero 圖片 */
-    .hero-image img {
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.16);
+    }
+
+    .hero-meta {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Hero 圖片側 */
+    .hero-image-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(228, 215, 198, 0.95);
+      background: #000;
+    }
+
+    .hero-image-card img {
       width: 100%;
-      border-radius: 18px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.05);
+      transform: scale(1.02);
+      transition: transform 0.8s ease, filter 0.8s ease;
     }
 
-    /* Sections */
+    .hero-image-card:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.15);
+    }
+
+    /* ===== 下面內容區 ===== */
     .section {
-      margin: 60px 0;
+      margin-top: 52px;
     }
 
-    /* Footer */
+    .section-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.92);
+      border-radius: 18px;
+      padding: 24px 26px 30px;
+      border: 1px solid rgba(228,215,198,0.8);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      margin: 0 0 6px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .section p {
+      font-size: 14px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .chip-card {
+      padding: 14px 14px 16px;
+      border-radius: 14px;
+      border: 1px dashed rgba(228,215,198,0.9);
+      background: rgba(252, 249, 244, 0.95);
+      font-size: 13px;
+    }
+
+    .chip-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-green);
+    }
+
+    /* Scatterplot 容器 */
+    #scatterplot {
+      margin-top: 20px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid rgba(228,215,198,0.9);
+      box-shadow: 0 10px 26px rgba(15,23,42,0.06);
+      padding: 10px;
+    }
+
     footer {
       text-align: center;
-      padding: 20px;
-      color: #777;
+      padding: 22px 0 26px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 900px) {
+      .hero-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .hero-image-card {
+        order: -1;
+      }
+      .main-nav {
+        padding-inline: 16px;
+      }
+      main {
+        padding-inline: 16px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="hero-bg"></div>
+  <!-- 導航列 -->
+  <nav class="main-nav">
+    <div class="logo">Ivan&nbsp;Law</div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><button id="cvButton">CV</button></li>
+    </ul>
+  </nav>
 
-  <!-- Navigation -->
-  <header class="site-header">
-    <nav class="main-nav">
-      <div class="logo">Ivan Law</div>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#works">Works</a></li>
-        <li><button id="cvButton">CV</button></li>
-      </ul>
-    </nav>
+  <main>
+    <!-- HERO 區 -->
+    <section class="hero-wrapper">
+      <article class="hero-card">
+        <p class="eyebrow">VISUAL STORYTELLER</p>
+        <h1 class="hero-title">Photography, film & animation with a quiet narrative.</h1>
+        <p class="hero-sub">攝影・影像・動畫｜把文化與日常變成一個個細膩的故事。</p>
 
-    <!-- HERO SECTION -->
-    <div class="hero">
-      <div class="hero-text">
-        <h1>Welcome to My Visual World</h1>
-
-        <div class="hero-badges">
-          <div class="badge">Photography</div>
-          <div class="badge">Film Editing</div>
-          <div class="badge">Animation</div>
-          <div class="badge">Graphic Design</div>
-        </div>
-
-        <p class="lead">
-          I create stories through photography, film and animation,
-          blending culture, colour and emotion into unique visual narratives.
+        <p class="hero-copy">
+          I explore cities, culture and everyday emotions through images.
+          From travel photography to community documentaries and children’s animations,
+          my work blends observation with gentle visual storytelling.
         </p>
 
-        <div class="hero-actions">
-          <a href="timeline.html" class="btn btn-primary">📈 Growth Timeline</a>
-          <a href="interactive3d.html" class="btn btn-secondary">🌀 3D Creative Space</a>
+        <div class="hero-tags">
+          <span class="tag">Travel & Cultural Photography</span>
+          <span class="tag">Documentary Film</span>
+          <span class="tag">2D Animation</span>
+          <span class="tag">Graphic Design</span>
         </div>
-      </div>
 
-      <div class="hero-image">
-        <img src="download.jpg" alt="Japanese castle under cherry blossoms">
-      </div>
-    </div>
-  </header>
+        <div class="hero-actions">
+          <a href="timeline.html" class="btn btn-primary">📈 View Growth Timeline</a>
+          <a href="interactive3d.html" class="btn btn-secondary">🌀 Explore 3D Creative Space</a>
+        </div>
 
-  <!-- Main Content -->
-  <main>
-    <section id="about" class="section page-wrapper">
-      <h2>About Me</h2>
-      <p>
-        I started my creative journey without many resources, learning to turn
-        everyday moments into compelling visuals. Today, I work across photography,
-        filmmaking and animation—transforming cultural observations and personal
-        experiences into visual art.
-      </p>
+        <div class="hero-meta">
+          Based in Hong Kong · Inspired by streets, small shops and distant cities.
+        </div>
+      </article>
+
+      <aside class="hero-image-card">
+        <img src="download.jpg" alt="Japanese castle framed by cherry blossoms">
+      </aside>
     </section>
 
-    <section id="works" class="section page-wrapper">
-      <h2>Works Overview</h2>
-      <p>Explore my documentary work, animations and creative data visualizations.</p>
+    <!-- About 區 -->
+    <section id="about" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-sub">從有限的資源出發，一步一步累積自己的視覺世界。</p>
+        <p>
+          I didn’t grow up with professional cameras or a full studio. Instead, I learned
+          to work with what I had and to look more carefully at the world around me.
+          A workshop in secondary school sparked my interest in photography and video
+          editing, and since then I’ve been capturing cities, people and small details
+          that often go unnoticed.
+        </p>
+        <p>
+          Today I create across photography, film, animation and graphic design—often
+          combining personal stories with social and community themes.
+        </p>
+      </div>
+    </section>
+
+    <!-- Works / Data 區 -->
+    <section id="works" class="section">
+      <div class="section-inner">
+        <h2 class="section-title">Works & Experiments</h2>
+        <p class="section-sub">作品與視覺實驗的交叉點。</p>
+
+        <div class="section-grid">
+          <div class="chip-card">
+            <strong>Travel & Documentary</strong>
+            City shrines, old stationery shops, and community stories that capture the
+            character of each place.
+          </div>
+          <div class="chip-card">
+            <strong>Children’s Animation</strong>
+            Visual stories explaining emotions and family change to younger audiences.
+          </div>
+          <div class="chip-card">
+            <strong>Data as Art</strong>
+            Turning simple datasets about my own work into visual experiments, like
+            scatterplots and timelines.
+          </div>
+        </div>
+
+        <div id="scatterplot"></div>
+      </div>
     </section>
   </main>
 
@@ -240,9 +417,9 @@
     © <span id="year"></span> Ivan Law · Visual Storyteller
   </footer>
 
+  <!-- 互動 JS：沿用你原本的檔案 -->
   <script src="code.js"></script>
   <script src="scatterplot.js"></script>
-
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
