@@ -176,6 +176,9 @@
 </head>
 
 <body>
+  <div class="hero-bg"></div>
+
+  <!-- Navigation -->
   <header class="site-header">
     <nav class="main-nav">
       <div class="logo">Ivan Law</div>
@@ -186,88 +189,50 @@
       </ul>
     </nav>
 
+    <!-- HERO SECTION -->
     <div class="hero">
       <div class="hero-text">
-        <p class="eyebrow">Visual Storyteller • Photographer • Filmmaker</p>
-        <h1>Welcome to my creative universe.</h1>
+        <h1>Welcome to My Visual World</h1>
+
+        <div class="hero-badges">
+          <div class="badge">Photography</div>
+          <div class="badge">Film Editing</div>
+          <div class="badge">Animation</div>
+          <div class="badge">Graphic Design</div>
+        </div>
+
         <p class="lead">
-          I capture culture, colour and emotion through photography, film and animation.
-          This site is a map of how my creative work grows and connects.
+          I create stories through photography, film and animation,
+          blending culture, colour and emotion into unique visual narratives.
         </p>
 
         <div class="hero-actions">
-          <a href="timeline.html" class="btn btn-primary">
-            📈 View My Growth Timeline
-          </a>
-          <a href="interactive3d.html" class="btn btn-secondary">
-            🌀 Explore My 3D Creative Space
-          </a>
+          <a href="timeline.html" class="btn btn-primary">📈 Growth Timeline</a>
+          <a href="interactive3d.html" class="btn btn-secondary">🌀 3D Creative Space</a>
         </div>
-
-        <a class="intro_button" href="https://www.instagram.com/" target="_blank">
-          Follow me on Instagram
-        </a>
       </div>
 
       <div class="hero-image">
-        
-        <img src="download.jpg" alt="Japanese castle with cherry blossoms" />
+        <img src="download.jpg" alt="Japanese castle under cherry blossoms">
       </div>
     </div>
   </header>
 
+  <!-- Main Content -->
   <main>
-    
-    <section id="about" class="section">
+    <section id="about" class="section page-wrapper">
       <h2>About Me</h2>
       <p>
-        I grew up without a lot of resources, so I learned early to create with what I had.
-        A chance workshop in secondary school sparked my interest in photography and video editing.
-        Since then, I’ve been using my camera to explore cities, culture and everyday stories –
-        believing that creativity is not about expensive gear, but about how we observe and feel.
-      </p>
-      <p>
-        Today, I work across photography, film, animation and graphic design, often blending
-        documentary and imaginative elements to build visuals that are both personal and social.
+        I started my creative journey without many resources, learning to turn
+        everyday moments into compelling visuals. Today, I work across photography,
+        filmmaking and animation—transforming cultural observations and personal
+        experiences into visual art.
       </p>
     </section>
 
-    
-    <section id="works" class="section grid">
-      <article class="card">
-        <h3>Travel & Photography</h3>
-        <p>
-          A visual diary of cities and cultures I have visited – from Japanese shrines
-          to Indian palaces – focusing on colour, architecture and atmosphere.
-        </p>
-        <a href="map.html" class="btn btn-ghost">View My Travel & Visitor Map</a>
-      </article>
-
-      <article class="card">
-        <h3>Creative Network</h3>
-        <p>
-          An experimental network visualization that maps how my skills, interests
-          and future goals connect to each other.
-        </p>
-        <a href="network.html" class="btn btn-ghost">Network Visualization</a>
-      </article>
-
-      <article class="card">
-        <h3>Featured Work</h3>
-        <div id="my_work1">
-    
-        </div>
-      </article>
-    </section>
-
-    
-    <section id="vis-scatterplot" class="section">
-      <h2>Data & Visualization</h2>
-      <p>
-        I also enjoy using data as a creative medium. This scatterplot is a small
-        experiment in turning numbers into visual stories.
-      </p>
-      <div id="scatterplot"></div>
+    <section id="works" class="section page-wrapper">
+      <h2>Works Overview</h2>
+      <p>Explore my documentary work, animations and creative data visualizations.</p>
     </section>
   </main>
 
@@ -275,12 +240,10 @@
     © <span id="year"></span> Ivan Law · Visual Storyteller
   </footer>
 
- 
   <script src="code.js"></script>
   <script src="scatterplot.js"></script>
 
   <script>
-
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
