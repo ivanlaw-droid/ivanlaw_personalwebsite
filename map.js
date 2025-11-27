@@ -53,16 +53,35 @@ d3.json(worldGeoJSON)
       .attr("stroke-width", 0.5);
 
  
-    const graticule = d3.geoGraticule();
-    svg.append("path")
-      .datum(graticule())
-      .attr("d", path)
-      .attr("fill", "none")
-      .attr("stroke", "rgba(148, 163, 184, 0.35)")
-      .attr("stroke-width", 0.4);
+ const graticule = d3.geoGraticule();
+svg.append("path")
+  .datum(graticule())
+  .attr("d", path)
+  .attr("fill", "none")
+  .attr("stroke", "rgba(148, 163, 184, 0.35)")
+  .attr("stroke-width", 0.4);
 
- 
-    const pointGroup = svg.append("g");
+
+const home = places.find(function (d) { return d.type === "home"; });
+
+svg.append("g")
+  .selectAll("path.route")
+  .data(places.filter(function (d) { return d.type !== "home"; }))
+  .enter()
+  .append("path")
+  .attr("class", "route")
+  .attr("d", function (d) {
+    return path({
+      type: "LineString",
+      coordinates: [
+        [home.lon, home.lat],
+        [d.lon, d.lat]
+      ]
+    });
+  });
+
+
+const pointGroup = svg.append("g");
 
     const points = pointGroup.selectAll("circle.city")
       .data(places)

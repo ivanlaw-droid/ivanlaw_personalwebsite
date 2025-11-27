@@ -69,13 +69,40 @@
       padding: 0 20px;
     }
 
-    .map-card {
-      background: #fffaf6;
-      border-radius: 20px;
-      padding: 24px 24px 26px;
-      border: 1px solid rgba(228, 215, 198, 0.9);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
+  .map-card {
+  position: relative; 
+  background: #fffaf6;
+  border-radius: 20px;
+  padding: 24px 24px 26px;
+  border: 1px solid rgba(228, 215, 198, 0.9);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+   
+.map-badge {
+  position: absolute;
+  top: 16px;
+  right: 22px;
+  padding: 4px 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: rgba(196, 91, 91, 0.08);
+  border: 1px solid rgba(196, 91, 91, 0.5);
+  color: #7b3f3f;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  transform: rotate(-4deg);
+}
+
+
+.map-card:hover #map {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
+}
+
+#map {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
 
     .map-title {
       font-family: "Playfair Display", serif;
@@ -128,6 +155,14 @@
     .legend-home { background: #c45b5b; }
     .legend-travel { background: #3485e2; }
     .legend-dream { background: #f5b940; }
+
+   
+.route {
+  fill: none;
+  stroke: rgba(148, 163, 184, 0.7);
+  stroke-width: 1.1;
+  stroke-dasharray: 4 6;
+}
 
    
     #map {
@@ -295,6 +330,14 @@
     
     <section class="map-card">
       <h1 class="map-title">Cities I’ve visited &amp; dream to film</h1>
+  
+
+  
+  <div class="map-badge">Visual travel log</div>
+
+  <p class="map-subtitle">Travel map · places that quietly shape my visual storytelling.</p>
+  ...
+</section>
       <p class="map-subtitle">Travel map · places that quietly shape my visual storytelling.</p>
 
       <div class="map-layout">
