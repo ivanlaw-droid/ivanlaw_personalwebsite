@@ -392,3 +392,7 @@ footer {
     order: -1;   
   }
 }
+
+.hero-image-card {
+    aspect-ratio: 5/ 4 !important;
+}
