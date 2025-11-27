@@ -41,7 +41,7 @@ d3.json(worldGeoJSON)
   .then(function (world) {
     const countries = world.features;
 
-   
+  
     svg.append("g")
       .selectAll("path")
       .data(countries)
@@ -52,7 +52,7 @@ d3.json(worldGeoJSON)
       .attr("stroke", "#d1bfae")
       .attr("stroke-width", 0.5);
 
-    
+ 
     const graticule = d3.geoGraticule();
     svg.append("path")
       .datum(graticule())
@@ -61,7 +61,7 @@ d3.json(worldGeoJSON)
       .attr("stroke", "rgba(148, 163, 184, 0.35)")
       .attr("stroke-width", 0.4);
 
-   
+ 
     const pointGroup = svg.append("g");
 
     const points = pointGroup.selectAll("circle.city")
@@ -71,23 +71,23 @@ d3.json(worldGeoJSON)
       .attr("class", "city")
       .attr("cx", function (d) { return projection([d.lon, d.lat])[0]; })
       .attr("cy", function (d) { return projection([d.lon, d.lat])[1]; })
-      .attr("r", 0) 
+      .attr("r", 0)
       .attr("fill", function (d) { return typeColor[d.type]; })
       .attr("stroke", "white")
       .attr("stroke-width", 1.2)
       .attr("opacity", 0.96);
 
-   
+  
     points.transition()
       .delay(function (d, i) { return 200 + i * 120; })
       .duration(600)
       .attr("r", 5);
 
-   
+
     points.append("title")
       .text(function (d) { return d.name + ", " + d.country; });
 
-  
+
     pointGroup.selectAll("circle.home-ring")
       .data(places.filter(function (d) { return d.type === "home"; }))
       .enter()
