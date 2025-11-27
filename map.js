@@ -111,7 +111,7 @@ const pointGroup = svg.append("g");
       .data(places.filter(function (d) { return d.type === "home"; }))
       .enter()
       .append("circle")
-      .attr("class", "home-ring")
+      .attr("class", "home-ring city-pulse")
       .attr("cx", function (d) { return projection([d.lon, d.lat])[0]; })
       .attr("cy", function (d) { return projection([d.lon, d.lat])[1]; })
       .attr("r", 9)
