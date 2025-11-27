@@ -4,28 +4,28 @@
   <meta charset="UTF-8" />
   <title>Ivan Law • Visual Storyteller</title>
 
-  <!-- 仍然使用你的全站 style.css -->
+  
   <link rel="stylesheet" href="style.css" />
 
-  <!-- 字體：日系感 + 優雅標題 -->
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-main: #f7f3ef;          /* 和紙米色 */
+      --bg-main: #f7f3ef;          
       --bg-card: #ffffff;
-      --ink: #1f2933;              /* 深墨色 */
-      --muted: #6b7280;            /* 淺灰文字 */
-      --accent-red: #c45b5b;       /* 暖赤紅 */
-      --accent-green: #2f4f4f;     /* 墨綠藍 */
+      --ink: #1f2933;             
+      --muted: #6b7280;            
+      --accent-red: #c45b5b;       
+      --accent-green: #2f4f4f;     
       --border-soft: #e4d7c6;
       --shadow-soft: 0 16px 40px rgba(15, 23, 42, 0.08);
       --radius-lg: 20px;
     }
 
-    /* ===== 背景與整體排版 ===== */
+
     body {
       margin: 0;
       font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
@@ -45,7 +45,6 @@
       color: inherit;
     }
 
-    /* ===== 導航列（日系簡約） ===== */
     .main-nav {
       display: flex;
       justify-content: space-between;
@@ -94,7 +93,7 @@
       transform: translateY(-1px);
     }
 
-    /* ===== Hero 區（兩欄，清爽卡片） ===== */
+   
     .hero-wrapper {
       margin-top: 32px;
       display: grid;
@@ -207,7 +206,7 @@
       color: var(--muted);
     }
 
-    /* Hero 圖片側 */
+    
     .hero-image-card {
       border-radius: var(--radius-lg);
       overflow: hidden;
@@ -231,7 +230,7 @@
       filter: saturate(1.15);
     }
 
-    /* ===== 下面內容區 ===== */
+ 
     .section {
       margin-top: 52px;
     }
@@ -320,7 +319,7 @@
 </head>
 
 <body>
-  <!-- 導航列 -->
+ 
   <nav class="main-nav">
     <div class="logo">Ivan&nbsp;Law</div>
     <ul>
@@ -331,7 +330,7 @@
   </nav>
 
   <main>
-    <!-- HERO 區 -->
+   
     <section class="hero-wrapper">
       <article class="hero-card">
         <p class="eyebrow">VISUAL STORYTELLER</p>
@@ -366,7 +365,7 @@
       </aside>
     </section>
 
-    <!-- About 區 -->
+  
     <section id="about" class="section">
       <div class="section-inner">
         <h2 class="section-title">About Me</h2>
@@ -385,7 +384,7 @@
       </div>
     </section>
 
-    <!-- Works / Data 區 -->
+  
     <section id="works" class="section">
       <div class="section-inner">
         <h2 class="section-title">Works & Experiments</h2>
@@ -417,7 +416,7 @@
     © <span id="year"></span> Ivan Law · Visual Storyteller
   </footer>
 
-  <!-- 互動 JS：沿用你原本的檔案 -->
+
   <script src="code.js"></script>
   <script src="scatterplot.js"></script>
   <script>

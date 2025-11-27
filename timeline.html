@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My Progress Over Time</title>
+  <meta charset="UTF-8" />
+  <title>Ivan Law • Creative Growth Timeline</title>
+  <link href="style.css" rel="stylesheet" />
+
+  <!-- D3 -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
+
   <style>
-    body {
-      font-family: "Arial", sans-serif;
-      background-color: #f6f8fa;
-      text-align: center;
-      color: #333;
+    .page-title {
+      font-family: "Playfair Display", serif;
+      font-size: 32px;
+      margin-bottom: 6px;
     }
-    svg {
-      margin-top: 40px;
-      border: 1px solid #ccc;
-      background: white;
+    .page-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 24px;
+    }
+    .chart-box {
+      background: #fff;
+      border: 1px solid rgba(228,215,198,0.9);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
     }
   </style>
 </head>
 
 <body>
-  <h1>📈 My Creative Growth Over Time</h1>
-  <p>This chart dynamically shows how my activity evolves through time.</p>
+  <nav class="main-nav">
+    <div class="logo">Ivan&nbsp;Law</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="my_work.html">Works</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="interactive3d.html">3D</a></li>
+    </ul>
+  </nav>
 
-  <svg id="timeChart" width="800" height="400"></svg>
+  <main class="page-wrapper">
+    <h1 class="page-title">📈 Creative Growth Timeline</h1>
+    <p class="page-subtitle">看見創作是如何一年一年累積而成。</p>
+
+    <div class="chart-box">
+      <svg id="timeChart" width="780" height="400"></svg>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> Ivan Law · Visual Storyteller
+  </footer>
 
   <script src="timeline.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>

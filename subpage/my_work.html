@@ -1,13 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link href="style.css" rel="stylesheet"/>
- <title>Ivan Law</title>
- <script src="https://d3js.org/d3.v7.min.js"></script>
+  <meta charset="UTF-8" />
+  <title>Ivan Law • Data & Projects</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <style>
+    .page-title {
+      font-size: 32px;
+      font-family: "Playfair Display", serif;
+      margin-bottom: 6px;
+    }
+    .page-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 20px;
+      max-width: 720px;
+    }
+    .chart-container {
+      background: #fff;
+      border: 1px solid rgba(228,215,198,0.9);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+  </style>
 </head>
 
 <body>
-   <section id="vis-scatterplot">
-    <h2>This is a scatterplot about my prior work.</h2>
-   </section>  
+  <nav class="main-nav">
+    <div class="logo">Ivan Law</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="interactive3d.html">3D</a></li>
+    </ul>
+  </nav>
 
-   <script src="src/scatterplot.js"></script>
-  </body>
+  <main class="page-wrapper">
+    <h1 class="page-title">📊 Data & Prior Works</h1>
+    <p class="page-subtitle">
+    
+    </p>
+
+    <div class="chart-container">
+      <div id="scatterplot"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    © <span id="year"></span> Ivan Law · Visual Storyteller
+  </footer>
+
+  <script src="src/scatterplot.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
