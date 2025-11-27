@@ -98,3 +98,123 @@ d3.json(worldGeoJSON)
   .catch(err => {
     console.error("Error loading world GeoJSON:", err);
   });
+
+ 
+
+.map-extra {
+  margin-top: 32px;
+}
+
+.map-extra-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+.map-feature {
+  background: #fffaf6;
+  border-radius: 20px;
+  padding: 22px 22px 24px;
+  border: 1px solid rgba(228, 215, 198, 0.9);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.map-feature-title {
+  font-family: "Playfair Display", serif;
+  font-size: 22px;
+  margin: 0 0 6px;
+  color: #1f2933;
+}
+
+.map-feature-sub {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 10px;
+}
+
+.map-feature-copy {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #444;
+  margin: 0 0 8px;
+}
+
+.map-feature-photo img {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+}
+
+.map-city-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.city-card {
+  background: rgba(255, 250, 246, 0.9);
+  border-radius: 16px;
+  padding: 14px 14px 16px;
+  border: 1px solid rgba(228, 215, 198, 0.9);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+}
+
+.city-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: #1f2933;
+}
+
+.city-tagline {
+  font-size: 12px;
+  color: #9a8f82;
+  margin: 0 0 8px;
+}
+
+.city-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0;
+}
+
+.city-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.chip {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(231, 192, 167, 0.16);
+  border: 1px solid rgba(231, 192, 167, 0.8);
+  color: #7a5a4a;
+}
+
+
+@media (max-width: 900px) {
+  .map-feature {
+    grid-template-columns: 1fr;
+  }
+  .map-city-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .map-city-grid {
+    grid-template-columns: 1fr;
+  }
+}
