@@ -261,3 +261,26 @@ footer {
     padding-inline: 16px;
   }
 }
+
+
+.hero-image-card {
+  overflow: auto;                 
+  position: relative;
+}
+
+
+.hero-image-card::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+
+.hero-image-card {
+  scrollbar-width: none;         
+}
+
+
+.hero-image-card {
+  -ms-overflow-style: none;
+}
