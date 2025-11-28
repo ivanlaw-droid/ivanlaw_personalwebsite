@@ -2,35 +2,243 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ivan Law • Data & Projects</title>
-  <link href="style.css" rel="stylesheet" />
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <title>Data & Prior Works • Ivan Law</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- 共用樣式 -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- 此頁專用樣式 -->
   <style>
-    .page-title {
-      font-size: 32px;
-      font-family: "Playfair Display", serif;
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: #f7f3ef;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
+    }
+
+    .page-shell-works {
+      max-width: 1100px;
+      margin: 26px auto 64px;
+      padding: 0 20px;
+    }
+
+    .works-card {
+      background: rgba(255, 250, 246, 0.98);
+      border-radius: 22px;
+      padding: 26px 26px 30px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .works-header {
+      margin-bottom: 16px;
+    }
+
+    .works-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin-bottom: 6px;
     }
-    .page-subtitle {
-      font-size: 14px;
-      color: #6b7280;
-      margin-bottom: 20px;
-      max-width: 720px;
+
+    .works-title-row span.emoji {
+      font-size: 24px;
     }
-    .chart-container {
-      background: #fff;
-      border: 1px solid rgba(228,215,198,0.9);
+
+    .works-title {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      margin: 0;
+      color: #111827;
+    }
+
+    .works-subtitle {
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0;
+    }
+
+    .works-pill-row {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .works-pill {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      color: #9a8f82;
+    }
+
+    /* Feature projects */
+    .works-section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      margin: 26px 0 10px;
+      color: #1f2937;
+    }
+
+    .works-section-sub {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 0 0 16px;
+      max-width: 640px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.98);
       border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+      padding: 16px 18px 18px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+
+    .project-year {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9a8f82;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .project-tag {
+      font-size: 10.5px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(231, 192, 167, 0.14);
+      border: 1px solid rgba(231, 192, 167, 0.7);
+      color: #7a5a4a;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #4b5563;
+      margin: 0;
+    }
+
+    .project-link-row {
+      margin-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .project-link {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: rgba(248, 250, 252, 0.96);
+      color: #374151;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+    }
+
+    .project-link:hover {
+      background: #e5f3ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Archive list */
+    .archive-block {
+      margin-top: 12px;
+      border-top: 1px dashed rgba(228, 215, 198, 0.9);
+      padding-top: 18px;
+    }
+
+    .archive-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .archive-item {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #4b5563;
+    }
+
+    .archive-item a {
+      font-weight: 500;
+      text-decoration: none;
+      color: #1d4ed8;
+    }
+
+    .archive-item a:hover {
+      text-decoration: underline;
+    }
+
+    .archive-meta {
+      display: block;
+      font-size: 11px;
+      color: #9a8f82;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .works-card {
+        padding: 22px 18px 24px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <!-- NAV：沿用 data 系列頁的結構 -->
   <nav class="main-nav">
-    <div class="logo">Ivan Law</div>
+    <div class="logo">
+      <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
+    </div>
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="timeline.html">Timeline</a></li>
@@ -39,22 +247,165 @@
     </ul>
   </nav>
 
-  <main class="page-wrapper">
-    <h1 class="page-title">📊 Data & Prior Works</h1>
-    <p class="page-subtitle">
-    
-    </p>
+  <main class="page-shell-works">
+    <section class="works-card">
+      <header class="works-header">
+        <div class="works-title-row">
+          <span class="emoji">📊</span>
+          <h1 class="works-title">Data &amp; Prior Works</h1>
+        </div>
+        <p class="works-subtitle">
+          A selection of projects that combine visual storytelling, data, and social themes.
+          These pieces are often referenced in my CV and portfolio — each link opens the full
+          work, so you can explore the details beyond a short description.
+        </p>
 
-    <div class="chart-container">
-      <div id="scatterplot"></div>
-    </div>
+        <div class="works-pill-row">
+          <span class="works-pill">DOCUMENTARY &amp; PHOTO</span>
+          <span class="works-pill">INTERACTIVE &amp; DATA</span>
+          <span class="works-pill">SOCIAL THEMES</span>
+        </div>
+      </header>
+
+      <!-- FEATURE PROJECTS -->
+      <h2 class="works-section-title">Feature Projects</h2>
+      <p class="works-section-sub">
+        Three works that best represent how I think about images, data and people — mixing
+        documentary sensibility with careful design and structure.
+      </p>
+
+      <div class="project-grid">
+
+        <!-- Project 1 -->
+        <article class="project-card">
+          <div class="project-meta-row">
+            <h3 class="project-title">Foggy Estate · A Quiet Study of High-rise Life</h3>
+            <span class="project-year">2024 · Short film</span>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Documentary</span>
+            <span class="project-tag">Urban mood</span>
+            <span class="project-tag">Sound design</span>
+          </div>
+          <p class="project-desc">
+            A slow, observational short filmed in older housing estates. Instead of interviews,
+            the piece uses fog, light, elevator doors and ambient sound to suggest how people move
+            through compressed vertical space. The edit focuses on rhythm and breathing room rather
+            than obvious narration.
+          </p>
+          <div class="project-link-row">
+            <!-- TODO: 把下面 link 換成你真正的影片網址（例如 YouTube / Vimeo） -->
+            <a class="project-link" href="https://your-link-here.com" target="_blank" rel="noopener">
+              View film
+              <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card">
+          <div class="project-meta-row">
+            <h3 class="project-title">Mapping Small Rooms · Data Portrait of Subdivided Flats</h3>
+            <span class="project-year">2024 · Data story</span>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Data visualization</span>
+            <span class="project-tag">Housing</span>
+            <span class="project-tag">Social research</span>
+          </div>
+          <p class="project-desc">
+            A visual essay that turns housing statistics, floor-plan sketches and interview notes
+            into layered graphics. The project pairs charts with hand-drawn diagrams to show not
+            only numbers, but also how space feels when it is too small, too loud, or shared by
+            too many people.
+          </p>
+          <div class="project-link-row">
+            <!-- TODO: 換成你實際的互動頁／Notion／GitHub Pages 連結 -->
+            <a class="project-link" href="https://your-link-here.com" target="_blank" rel="noopener">
+              Open data story
+              <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card">
+          <div class="project-meta-row">
+            <h3 class="project-title">Youth &amp; Uncertain Futures · Visual Interview Notes</h3>
+            <span class="project-year">2023 · Mixed-media</span>
+          </div>
+          <div class="project-tags">
+            <span class="project-tag">Infographic</span>
+            <span class="project-tag">Education</span>
+            <span class="project-tag">Story mapping</span>
+          </div>
+          <p class="project-desc">
+            Based on conversations with secondary and tertiary students, this piece turns
+            interview fragments into a map of questions: work, study, migration, burnout.
+            Hand-written typography and simple iconography keep the tone honest and accessible,
+            borrowing from zine culture instead of corporate reports.
+          </p>
+          <div class="project-link-row">
+            <!-- TODO: 換成你用來展示作品的頁面，例如 PDF／Behance／Google Drive -->
+            <a class="project-link" href="https://your-link-here.com" target="_blank" rel="noopener">
+              View visual notes
+              <span>↗</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- ARCHIVE -->
+      <div class="archive-block">
+        <h2 class="works-section-title" style="font-size:19px;">Selected Archive</h2>
+        <p class="works-section-sub">
+          A broader look at ongoing work — smaller experiments, collaborations and studies that
+          continue to shape how I see images, space and data.
+        </p>
+
+        <ul class="archive-list">
+          <li class="archive-item">
+            <a href="https://your-link-here.com" target="_blank" rel="noopener">
+              Night Buses &amp; Neon Signs – photo series
+            </a>
+            <span class="archive-meta">2022 · Street photography · Light, colour, repetition</span>
+          </li>
+
+          <li class="archive-item">
+            <a href="https://your-link-here.com" target="_blank" rel="noopener">
+              Lines Between Blocks – estate stairwell study
+            </a>
+            <span class="archive-meta">2023 · Still images + GIF loops · Geometry of public housing</span>
+          </li>
+
+          <li class="archive-item">
+            <a href="https://your-link-here.com" target="_blank" rel="noopener">
+              Listening Rooms – small audio postcard project
+            </a>
+            <span class="archive-meta">2023 · Ambient recordings paired with still frames</span>
+          </li>
+
+          <li class="archive-item">
+            <a href="https://your-link-here.com" target="_blank" rel="noopener">
+              Youth Mental Health Info Cards
+            </a>
+            <span class="archive-meta">2024 · Illustrated cards · Designed for workshops &amp; school use</span>
+          </li>
+
+          <li class="archive-item">
+            <a href="https://your-link-here.com" target="_blank" rel="noopener">
+              Documentary Research Notes – social work placement
+            </a>
+            <span class="archive-meta">2024 · Field notes &amp; visual summaries · Ethics, access, observation</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      © 2025 Ivan Law · Visual Storyteller
+    </footer>
   </main>
-
-  <footer class="site-footer">
-    © <span id="year"></span> Ivan Law · Visual Storyteller
-  </footer>
-
-  <script src="src/scatterplot.js"></script>
-  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
