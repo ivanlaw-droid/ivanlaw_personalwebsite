@@ -121,8 +121,12 @@
       overflow: hidden;
     }
 
-    /* 🔧 防止全局 CSS 把 Plotly 畫面隱形 */
-    #skill-3d-chart .js-plotly-plot,
+    /* 🚨 強制讓 Plotly 顯示出來，避免被全局 CSS 隱藏 */
+    #skill-3d-chart .js-plotly-plot {
+      display: block !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
     #skill-3d-chart .js-plotly-plot svg,
     #skill-3d-chart .js-plotly-plot canvas {
       opacity: 1 !important;
