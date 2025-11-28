@@ -5,10 +5,10 @@
   <title>3D Creative Universe • Ivan Law</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- 全站樣式 -->
+  <!-- 共用樣式 -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- 這一頁額外樣式 -->
+  <!-- 這頁額外樣式 -->
   <style>
     html, body {
       margin: 0;
@@ -19,7 +19,13 @@
         "Noto Sans JP", sans-serif;
     }
 
-    /* nav 下方的三個 pill 按鈕（跟 map 一致） */
+    .page-shell-3d {
+      max-width: 1100px;
+      margin: 24px auto 64px;
+      padding: 0 20px;
+    }
+
+    /* nav 下方快捷鍵（同 map 風格） */
     .page-shortcuts {
       max-width: 1100px;
       margin: 10px auto 0;
@@ -63,13 +69,7 @@
       box-shadow: 0 14px 26px rgba(15, 23, 42, 0.35);
     }
 
-    /* 主卡片佈局 */
-    .page-shell-3d {
-      max-width: 1100px;
-      margin: 24px auto 64px;
-      padding: 0 20px;
-    }
-
+    /* 主卡片 */
     .universe-card {
       background: #fffaf6;
       border-radius: 22px;
@@ -110,7 +110,7 @@
       line-height: 1.7;
     }
 
-    /* 3D chart 容器 */
+    /* 3D chart 容器 —— 高度固定，避免 0 高度 */
     #skill-3d-chart {
       width: 100%;
       height: 420px;
@@ -127,7 +127,7 @@
       color: #9a8f82;
     }
 
-    /* 下方三張說明小卡（延長文字） */
+    /* 下方三張說明小卡 */
     .axes-grid {
       margin-top: 22px;
       display: grid;
@@ -220,7 +220,7 @@
 </head>
 
 <body>
-  <!-- NAV：跟 index / map 一致 -->
+  <!-- NAV：跟 index / map 一樣 -->
   <nav class="main-nav">
     <div class="logo">
       <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
@@ -262,13 +262,13 @@
         Tip: Drag to rotate · Scroll to zoom · Drag to explore.
       </p>
 
-      <!-- 三軸解說（已延長文案） -->
+      <!-- 三軸解說 -->
       <div class="axes-grid">
         <article class="axis-card">
           <div class="axis-label">Axis X</div>
           <div class="axis-title">Creativity</div>
           <p class="axis-body">
-            How expressive, conceptual or experimental the skill is.  
+            How expressive, conceptual or experimental the skill is.
             Projects that lean into visual storytelling, mood and atmosphere – such as
             photography sequences or animation loops – tend to sit further along this axis,
             while more functional design work stays closer to the centre.
@@ -279,7 +279,7 @@
           <div class="axis-label">Axis Y</div>
           <div class="axis-title">Technical Skill</div>
           <p class="axis-body">
-            How much technical mastery is required in real projects.  
+            How much technical mastery is required in real projects.
             This ranges from camera operation, editing and compositing to building web
             experiences, structuring data and using creative coding or AI tools in a
             deliberate way instead of just “trying things out”.
@@ -291,9 +291,9 @@
           <div class="axis-title">Experience</div>
           <p class="axis-body">
             How often I’ve used this skill in real work – photo stories, school and
-            community projects, internships and self-initiated experiments.  
-            Points higher on this axis represent areas I feel confident taking into
-            client work or larger collaborations.
+            community projects, internships and self-initiated experiments.
+            Points higher on this axis represent areas I feel confident bringing into
+            collaborations or client work.
           </p>
         </article>
       </div>
@@ -301,8 +301,8 @@
       <p class="universe-footnote">
         Points that sit closer together are skills I often combine in the same work –
         for example, <strong>photography + documentary film</strong> for community
-        stories, or <strong>2D animation + graphic design</strong> for short explainer
-        pieces and youth projects.
+        stories, or <strong>2D animation + graphic design</strong> for explainer pieces
+        and youth projects.
       </p>
 
       <div class="universe-footer-row">
@@ -315,15 +315,18 @@
     </section>
   </main>
 
-  <!-- ✅ 先載入 Plotly（使用你專案內的本地檔） -->
-  <script src="plotly-latest.min.js"></script>
+  <!-- ✅ 只用 CDN Plotly，不用本地 JS 檔 -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 
-  <!-- ✅ 然後才畫 3D 圖 -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var container = document.getElementById("skill-3d-chart");
-      if (!container || typeof Plotly === "undefined") {
-        console.error("Plotly not ready — check script path.");
+      if (!container) {
+        console.error("No #skill-3d-chart container found.");
+        return;
+      }
+      if (typeof Plotly === "undefined") {
+        console.error("Plotly is not defined — CDN 沒有成功載入。");
         return;
       }
 
@@ -337,16 +340,16 @@
       ];
 
       var trace = {
-        x: skills.map(function (d) { return d.x; }),
-        y: skills.map(function (d) { return d.y; }),
-        z: skills.map(function (d) { return d.z; }),
+        x: skills.map(d => d.x),
+        y: skills.map(d => d.y),
+        z: skills.map(d => d.z),
         mode: "markers+text",
         type: "scatter3d",
-        text: skills.map(function (d) { return d.name; }),
+        text: skills.map(d => d.name),
         textposition: "top center",
         marker: {
-          size: skills.map(function (d) { return d.size; }),
-          color: skills.map(function (d) { return d.color; }),
+          size: skills.map(d => d.size),
+          color: skills.map(d => d.color),
           opacity: 0.9
         },
         hovertemplate:
