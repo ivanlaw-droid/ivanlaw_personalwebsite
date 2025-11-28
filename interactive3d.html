@@ -360,36 +360,40 @@
       var layout = {
   margin: { l: 0, r: 0, t: 0, b: 0 },
   scene: {
-    bgcolor: "rgba(224,242,254,1)",
+    bgcolor: "rgba(230,240,255,1)",   // 明顯底色
     xaxis: {
       title: "Creativity",
-      showgrid: true,
-      gridcolor: "#d1d5db",
-      zeroline: false,
+      gridcolor: "#999",
       showbackground: true,
-      backgroundcolor: "rgba(255,255,255,0.9)"
+      backgroundcolor: "#ffffff",
+      zerolinecolor: "#000"
     },
     yaxis: {
       title: "Technical skill",
-      showgrid: true,
-      gridcolor: "#d1d5db",
-      zeroline: false,
+      gridcolor: "#999",
       showbackground: true,
-      backgroundcolor: "rgba(255,255,255,0.9)"
+      backgroundcolor: "#ffffff",
+      zerolinecolor: "#000"
     },
     zaxis: {
       title: "Experience",
-      showgrid: true,
-      gridcolor: "#d1d5db",
-      zeroline: false,
+      gridcolor: "#999",
       showbackground: true,
-      backgroundcolor: "rgba(255,255,255,0.9)"
+      backgroundcolor: "#ffffff",
+      zerolinecolor: "#000"
     },
-    // camera 開局就少少斜視角，立體感大啲
+
+    // 🚀 改camera，使3D效果立即非常清晰
     camera: {
-      eye: { x: 1.8, y: 1.6, z: 1.3 }
+      eye: { x: 2, y: 1.8, z: 1.4 }
     }
   }
+};
+
+// 粒點加白色 outline，更清楚
+trace.marker.line = {
+  width: 3,
+  color: "#ffffff"
 };
   </script>
 </body>
