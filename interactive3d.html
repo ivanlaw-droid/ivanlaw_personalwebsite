@@ -8,6 +8,7 @@
   <!-- 全站樣式 -->
   <link rel="stylesheet" href="style.css" />
 
+  <!-- 這一頁額外樣式（只處理排版與美感） -->
   <style>
     html, body {
       margin: 0;
@@ -24,7 +25,7 @@
       padding: 0 20px;
     }
 
-    /* nav 下方快捷鍵（和 map 一樣位置） */
+    /* nav 下方快捷鍵（位置跟 map 一樣，在右上） */
     .page-shortcuts {
       max-width: 1100px;
       margin: 10px auto 0;
@@ -43,7 +44,7 @@
       font-size: 11px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 12px;
+      padding: 6px 14px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.96);
       border: 1px solid rgba(214, 211, 209, 0.9);
@@ -59,6 +60,13 @@
       border-color: #60a5fa;
       color: #1d4ed8;
       transform: translateY(-1px);
+    }
+
+    .shortcut-pill.is-active {
+      background: #111827;
+      border-color: #111827;
+      color: #f9fafb;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.35);
     }
 
     /* 3D 宇宙主卡片 */
@@ -102,7 +110,7 @@
       line-height: 1.7;
     }
 
-    /* 3D chart 容器 – 用舊的 #chart3D，方便跟 style.css 一致 */
+    /* 3D 圖容器：一定要有高度 */
     #chart3D {
       width: 100%;
       height: 420px;
@@ -212,7 +220,7 @@
 </head>
 
 <body>
-  <!-- NAV -->
+  <!-- NAV：與其他頁一致 -->
   <nav class="main-nav">
     <div class="logo">
       <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
@@ -224,11 +232,11 @@
     </ul>
   </nav>
 
-  <!-- nav 下方快捷鍵 -->
+  <!-- nav 下方，右上角快捷鍵 -->
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
-      <a href="interactive3d.html" class="shortcut-pill" style="background:#111827;color:#f9fafb;border-color:#111827;">Data View</a>
+      <a href="interactive3d.html" class="shortcut-pill is-active">Data View</a>
       <a href="map.html" class="shortcut-pill">Travel Map</a>
     </div>
   </div>
@@ -251,7 +259,7 @@
       <div id="chart3D"></div>
 
       <p class="universe-note">
-        Tip: Drag to rotate · Scroll to zoom · Drag to explore.
+        Tip: Drag to rotate · Scroll to zoom · Drag to explore different angles of this skill universe.
       </p>
 
       <!-- 三軸解說 -->
@@ -260,10 +268,10 @@
           <div class="axis-label">Axis X</div>
           <div class="axis-title">Creativity</div>
           <p class="axis-body">
-            How expressive, conceptual or experimental the skill is. Projects that lean into
-            visual storytelling, mood and atmosphere – such as photography sequences,
-            documentary shorts or animation loops – tend to sit further along this axis,
-            while more functional design work stays closer to the centre.
+            How expressive, conceptual or experimental the skill is. Projects that lean into visual
+            storytelling, mood and atmosphere — such as photography sequences, documentary shorts
+            or animation loops — tend to sit further along this axis, while more functional design
+            work stays closer to the centre.
           </p>
         </article>
 
@@ -272,9 +280,8 @@
           <div class="axis-title">Technical Skill</div>
           <p class="axis-body">
             How much technical mastery is required in real projects. This ranges from camera
-            operation, editing and compositing to building web experiences, structuring data,
-            using creative coding or AI tools in a deliberate way instead of just “trying
-            things out”.
+            operation, editing and compositing to building web experiences, structuring data and
+            using creative coding or AI tools in a deliberate way instead of just “trying things out”.
           </p>
         </article>
 
@@ -282,18 +289,17 @@
           <div class="axis-label">Axis Z</div>
           <div class="axis-title">Experience</div>
           <p class="axis-body">
-            How often I’ve used this skill in real work – photo stories, school and community
-            projects, internships and self-initiated experiments. Points higher on this axis
-            represent areas I feel confident bringing into collaborations or client work.
+            How often this skill is used in real work — photo stories, school and community projects,
+            internships and self-initiated experiments. Points higher on this axis represent areas I feel
+            confident bringing into collaborations or client work, not just one-off exercises.
           </p>
         </article>
       </div>
 
       <p class="universe-footnote">
-        Points that sit closer together are skills I often combine in the same piece of work –
-        for example <strong>photography + documentary film</strong> for quiet community stories,
-        or <strong>web design + data visuals</strong> for projects that explain information in a
-        calm, visual way.
+        Points that sit closer together are skills I often combine in the same work – for example,
+        <strong>photography + documentary film</strong> for community stories, or
+        <strong>2D animation + graphic design</strong> for youth projects and educational content.
       </p>
 
       <div class="universe-footer-row">
@@ -306,12 +312,12 @@
     </section>
   </main>
 
-    <!-- Plotly 放在 body 最後 -->
+  <!-- Plotly：放在 body 最後 -->
   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 
+  <!-- 單一 script：畫 3D 圖 -->
   <script>
-    window.addEventListener("load", function () {
-      // 安全檢查
+    document.addEventListener("DOMContentLoaded", function () {
       if (typeof Plotly === "undefined") {
         console.error("Plotly not loaded");
         return;
@@ -323,7 +329,8 @@
         return;
       }
 
-      // 資料點（跟你之前的 skill 類似）
+      console.log("Plotly version:", Plotly.version);
+
       var skills = [
         { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
         { name: "Photography",      x: 3, y: 2, z: 6, size: 20, color: "#f97316" },
@@ -348,7 +355,7 @@
         marker: {
           size: skills.map(function (d) { return d.size; }),
           color: skills.map(function (d) { return d.color; }),
-          opacity: 1,
+          opacity: 0.95,
           line: {
             color: "#111827",
             width: 1
@@ -367,10 +374,10 @@
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         scene: {
-          bgcolor: "#eef2ff",            // 淺藍背景，對比明顯
+          bgcolor: "rgba(224,242,254,0.9)",
           xaxis: {
             title: "Creativity",
-            range: [0, 7],              // 強制範圍，避免太縮
+            range: [0, 7],
             showgrid: true,
             gridcolor: "#d1d5db",
             zeroline: true,
@@ -412,7 +419,5 @@
       Plotly.newPlot(container, [trace], layout, config);
     });
   </script>
-</body>
-</html>
 </body>
 </html>
