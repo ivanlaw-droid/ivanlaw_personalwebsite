@@ -43,7 +43,7 @@ const layout = {
   }
 };
 
-Plotly.newPlot("chart3D", [trace], layout, {
+//Plotly.newPlot("chart3D", [trace], layout, {
   responsive: true,
   displayModeBar: false
 });
