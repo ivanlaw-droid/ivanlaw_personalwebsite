@@ -1,9 +1,8 @@
 
-
 const width = 620;
 const height = 380;
 
-/
+
 const svg = d3
   .select("#map")
   .attr("viewBox", "0 0 " + width + " " + height)
@@ -61,7 +60,7 @@ d3.json(worldGeoJSON)
       .attr("stroke", "rgba(148, 163, 184, 0.35)")
       .attr("stroke-width", 0.4);
 
-    
+ 
     const home = places.find(function (d) { return d.type === "home"; });
 
     const routesGroup = svg.append("g")
@@ -84,14 +83,15 @@ d3.json(worldGeoJSON)
       })
       .attr("stroke", "rgba(148,163,184,0.8)")
       .attr("stroke-width", 1.4)
-      .attr("opacity", 1);   
+     
+      .attr("stroke-opacity", 0);
 
     
     routes.each(function () {
       const length = this.getTotalLength();
       d3.select(this)
         .attr("stroke-dasharray", length + " " + length)
-        .attr("stroke-dashoffset", length);  
+        .attr("stroke-dashoffset", length);   
     });
 
     
@@ -128,14 +128,15 @@ d3.json(worldGeoJSON)
         const length = this.getTotalLength();
         d3.select(this)
           .transition()
-          .delay(400 + i * 700)  
-          .duration(2800)         
+          .delay(400 + i * 700)   
+          .duration(2800)        
           .ease(d3.easeCubicOut)
+          .attr("stroke-opacity", 1)   
           .attr("stroke-dashoffset", 0);
       });
     }
 
-
+    
     points.append("title")
       .text(function (d) { return d.name + ", " + d.country; });
 
@@ -161,6 +162,7 @@ d3.json(worldGeoJSON)
         .attr("opacity", 0)
         .on("end", pulse);
     }
+
     pulse();
   })
   .catch(function (err) {
