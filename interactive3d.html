@@ -110,7 +110,7 @@
       line-height: 1.7;
     }
 
-    /* 3D chart 容器：用你 test 成功的設定 */
+    /* 3D chart 容器 */
     #chart3D {
       width: 100%;
       height: 420px;
@@ -312,10 +312,10 @@
     </section>
   </main>
 
-  <!-- ✅ 跟你測試頁同一個 CDN -->
+  <!-- Plotly CDN -->
   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 
-  <!-- ✅ 跟 plotly_test.html 基本同一段 JS，只改咗數值 -->
+  <!-- 3D 圖 JS -->
   <script>
     console.log("Plotly type on interactive3d:", typeof Plotly);
 
@@ -329,12 +329,12 @@
       }
 
       var skills = [
-        { name: "Web Design",       x: 1, y: 3, z: 4, size: 18, color: "#2563eb" },
-        { name: "Photography",      x: 2, y: 2, z: 5, size: 20, color: "#f97316" },
+        { name: "Web Design",       x: 1,   y: 3,   z: 4, size: 18, color: "#2563eb" },
+        { name: "Photography",      x: 2,   y: 2,   z: 5, size: 20, color: "#f97316" },
         { name: "Documentary Film", x: 1.5, y: 3.5, z: 6, size: 22, color: "#22c55e" },
-        { name: "2D Animation",     x: 3, y: 4, z: 3, size: 18, color: "#ec4899" },
-        { name: "Graphic Design",   x: 4, y: 3, z: 4, size: 16, color: "#7c3aed" },
-        { name: "Data / Info Viz",  x: 5, y: 2, z: 5, size: 18, color: "#0ea5e9" }
+        { name: "2D Animation",     x: 3,   y: 4,   z: 3, size: 18, color: "#ec4899" },
+        { name: "Graphic Design",   x: 4,   y: 3,   z: 4, size: 16, color: "#7c3aed" },
+        { name: "Data / Info Viz",  x: 5,   y: 2,   z: 5, size: 18, color: "#0ea5e9" }
       ];
 
       var trace = {
@@ -358,43 +358,47 @@
       };
 
       var layout = {
-  margin: { l: 0, r: 0, t: 0, b: 0 },
-  scene: {
-    bgcolor: "rgba(230,240,255,1)",   // 明顯底色
-    xaxis: {
-      title: "Creativity",
-      gridcolor: "#999",
-      showbackground: true,
-      backgroundcolor: "#ffffff",
-      zerolinecolor: "#000"
-    },
-    yaxis: {
-      title: "Technical skill",
-      gridcolor: "#999",
-      showbackground: true,
-      backgroundcolor: "#ffffff",
-      zerolinecolor: "#000"
-    },
-    zaxis: {
-      title: "Experience",
-      gridcolor: "#999",
-      showbackground: true,
-      backgroundcolor: "#ffffff",
-      zerolinecolor: "#000"
-    },
+        margin: { l: 0, r: 0, t: 0, b: 0 },
+        scene: {
+          bgcolor: "rgba(230,240,255,1)",
+          xaxis: {
+            title: "Creativity",
+            gridcolor: "#999",
+            showbackground: true,
+            backgroundcolor: "#ffffff",
+            zerolinecolor: "#000"
+          },
+          yaxis: {
+            title: "Technical skill",
+            gridcolor: "#999",
+            showbackground: true,
+            backgroundcolor: "#ffffff",
+            zerolinecolor: "#000"
+          },
+          zaxis: {
+            title: "Experience",
+            gridcolor: "#999",
+            showbackground: true,
+            backgroundcolor: "#ffffff",
+            zerolinecolor: "#000"
+          },
+          camera: {
+            eye: { x: 2, y: 1.8, z: 1.4 }
+          }
+        }
+      };
 
-    // 🚀 改camera，使3D效果立即非常清晰
-    camera: {
-      eye: { x: 2, y: 1.8, z: 1.4 }
-    }
-  }
-};
+      // 粒點加白色 outline，更清楚
+      trace.marker.line = {
+        width: 3,
+        color: "#ffffff"
+      };
 
-// 粒點加白色 outline，更清楚
-trace.marker.line = {
-  width: 3,
-  color: "#ffffff"
-};
+      Plotly.newPlot(el, [trace], layout, {
+        responsive: true,
+        displayModeBar: false
+      });
+    });
   </script>
 </body>
 </html>
