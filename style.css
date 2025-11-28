@@ -225,7 +225,7 @@ p {
 #scatterplot,
 #map {
   border-radius: 18px;
-  background: #ffffff;
+
   border: 1px solid rgba(228,215,198,0.9);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
 }
