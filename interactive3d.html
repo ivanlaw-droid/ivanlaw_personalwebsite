@@ -24,7 +24,7 @@
       padding: 0 20px;
     }
 
-    /* -- NAV 下方快捷鍵（與 map.html 一致） -- */
+    /* nav 下方快捷鍵 */
     .page-shortcuts {
       max-width: 1100px;
       margin: 12px auto 0;
@@ -35,45 +35,39 @@
 
     .shortcut-group {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .shortcut-pill {
       font-size: 11px;
-      padding: 6px 12px;
-      border-radius: 999px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(214,211,209,0.9);
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(214, 211, 209, 0.9);
       color: #6b7280;
       text-decoration: none;
-      box-shadow: 0 10px 22px rgba(15,23,42,0.12);
-      transition: all .2s ease;
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+      transition: all 0.2s ease;
+      white-space: nowrap;
     }
 
-    .shortcut-pill:hover,
-    .shortcut-pill.active {
+    .shortcut-pill:hover {
       background: #e0f2fe;
-      color: #1d4ed8;
       border-color: #60a5fa;
+      color: #1d4ed8;
       transform: translateY(-1px);
     }
 
-    /* -- 主卡片 -- */
+    /* 主圖卡 */
     .universe-card {
       background: #fffaf6;
       border-radius: 22px;
       padding: 28px 26px 30px;
-      border: 1px solid rgba(228,215,198,0.9);
-      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
-    }
-
-    .universe-header {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 18px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
     }
 
     .universe-title-row {
@@ -86,11 +80,11 @@
       font-family: "Playfair Display", serif;
       font-size: 26px;
       margin: 0;
-      color: #1f2933;
+      color: #111827;
     }
 
     .universe-subtitle {
-      margin: 0;
+      margin: 10px 0 12px;
       font-size: 13px;
       color: #6b7280;
       max-width: 640px;
@@ -100,60 +94,85 @@
     #skill-3d-chart {
       width: 100%;
       height: 420px;
-      margin-top: 14px;
       border-radius: 18px;
-      overflow: hidden;
-      background: radial-gradient(circle at 50% 0, #dbeafe, #eff6ff 55%, #e5e7eb);
-      box-shadow: 0 18px 40px rgba(15,23,42,0.12);
-    }
-
-    .universe-note {
-      margin-top: 10px;
-      font-size: 12px;
-      color: #9a8f82;
+      margin-top: 14px;
+      background: radial-gradient(circle at 50% 0, #e0f2fe, #eef2ff 55%, #e5e7eb);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
     }
 
     .axes-grid {
-      margin-top: 22px;
+      margin-top: 20px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
     .axis-card {
-      background: rgba(255,250,246,0.96);
+      background: rgba(255, 250, 246, 0.96);
       border-radius: 16px;
-      padding: 14px;
+      padding: 14px 14px 16px;
       border: 1px solid rgba(228,215,198,0.9);
-      box-shadow: 0 10px 24px rgba(15,23,42,0.04);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
     }
 
     .axis-label {
       font-size: 12px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.12em;
       color: #9a8f82;
-      margin-bottom: 4px;
+      text-transform: uppercase;
     }
 
     .axis-title {
+      margin-top: 4px;
       font-size: 15px;
       font-weight: 600;
       color: #1f2933;
-      margin-bottom: 4px;
     }
 
     .axis-body {
+      margin: 6px 0 0;
       font-size: 13px;
-      line-height: 1.6;
-      color: #444;
+      line-height: 1.65;
+      color: #475569;
+    }
+
+    .universe-footnote {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .universe-footer-row {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-link {
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(248, 250, 252, 0.95);
+      color: #374151;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: #e5f3ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+      transform: translateY(-1px);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- NAV (全站一致) -->
+  <!-- NAV -->
   <nav class="main-nav">
     <div class="logo">
       <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
@@ -165,22 +184,21 @@
     </ul>
   </nav>
 
-  <!-- 快捷鍵（右上角）-->
+  <!-- 快捷按鈕 -->
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
-      <a href="interactive3d.html" class="shortcut-pill active">Data View</a>
+      <a href="interactive3d.html" class="shortcut-pill" style="background:#1f2937; color:white;">Data View</a>
       <a href="map.html" class="shortcut-pill">Travel Map</a>
     </div>
   </div>
 
-  <!-- 內容 -->
   <main class="page-shell-3d">
-    <section class="universe-card">
 
-      <header class="universe-header">
+    <section class="universe-card">
+      <header>
         <div class="universe-title-row">
-          <span style="font-size:24px;">🌐</span>
+          <span style="font-size:22px;">🌐</span>
           <h1 class="universe-title">3D Creative Universe</h1>
         </div>
         <p class="universe-subtitle">
@@ -189,18 +207,17 @@
         </p>
       </header>
 
-      <!-- ⭐⭐⭐ 3D 圖 -->
       <div id="skill-3d-chart"></div>
 
-      <p class="universe-note">Tip: Drag to rotate · Scroll to zoom · Drag to explore.</p>
-
-      <!-- 下方三卡 -->
       <div class="axes-grid">
+
         <article class="axis-card">
           <div class="axis-label">Axis X</div>
           <div class="axis-title">Creativity</div>
           <p class="axis-body">
-            How expressive, conceptual or experimental the skill is.
+            How expressive, conceptual or experimental the skill is. This axis reflects
+            how freely each craft lets me shape ideas — from intuitive, emotion-driven
+            storytelling to structured information work.
           </p>
         </article>
 
@@ -208,7 +225,9 @@
           <div class="axis-label">Axis Y</div>
           <div class="axis-title">Technical Skill</div>
           <p class="axis-body">
-            How much technical mastery is required in real projects.
+            How much technical mastery is required in real work — including camera
+            operation, editing, 3D tools, coding and system implementation. Higher
+            positions often demand precision and strong tool knowledge.
           </p>
         </article>
 
@@ -216,58 +235,34 @@
           <div class="axis-label">Axis Z</div>
           <div class="axis-title">Experience</div>
           <p class="axis-body">
-            How often this skill is used in real work—photos, film, coding, design.
+            How often I've applied each skill in real projects — photo stories, social
+            campaigns, film work, design tasks or coding experiments.
           </p>
         </article>
+
+      </div>
+
+      <p class="universe-footnote">
+        Skills that sit closer together are ones I often combine — like <strong>photography +
+        documentary film</strong>, or <strong>design + animation</strong> for youth projects.
+      </p>
+
+      <div class="universe-footer-row">
+        <a href="index.html#works" class="back-link">← Back to Home</a>
+        <div class="footer-right-links">
+          <a href="timeline.html" class="back-link">Timeline</a>
+          <a href="map.html" class="back-link">Travel Map</a>
+        </div>
       </div>
     </section>
+
   </main>
 
-  <!-- ⭐⭐⭐ 使用支援 3D 的最新 Plotly -->
-  <!-- 強制載入完整 3D engine，不會被 GitHub cache -->
-<script src="https://cdn.jsdelivr.net/npm/plotly.js@2.27.0-dist/plotly.js"></script>
+  <!-- 1️⃣ 先載入 Plotly（必須在你自己的 JS 之前） -->
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js@2.27.0-dist/plotly.js"></script>
 
-  <!-- 3D Plot 程式 -->
-  <script>
-    window.addEventListener("load", function () {
-      var container = document.getElementById("skill-3d-chart");
-      if (!container) return;
-
-      var skills = [
-        { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
-        { name: "Creative Media",   x: 3, y: 1, z: 6, size: 22, color: "#7c3aed" },
-        { name: "AI Tools",         x: 6, y: 2, z: 3, size: 20, color: "#0ea5e9" },
-        { name: "Visualization",    x: 1, y: 3, z: 7, size: 24, color: "#22c55e" },
-        { name: "GitHub Projects",  x: 4, y: 6, z: 2, size: 16, color: "#f97316" },
-        { name: "Arduino / Making", x: 5, y: 4, z: 6, size: 20, color: "#e11d48" }
-      ];
-
-      Plotly.newPlot(container, [{
-        x: skills.map(s => s.x),
-        y: skills.map(s => s.y),
-        z: skills.map(s => s.z),
-        mode: "markers+text",
-        type: "scatter3d",
-        text: skills.map(s => s.name),
-        textposition: "top center",
-        marker: {
-          size: skills.map(s => s.size),
-          color: skills.map(s => s.color),
-          opacity: 0.9
-        }
-      }], {
-        margin: { l:0, r:0, t:0, b:0 },
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(0,0,0,0)",
-        scene: {
-          bgcolor: "rgba(224,242,254,0.9)",
-          xaxis: { title: "Creativity" },
-          yaxis: { title: "Technical Skill" },
-          zaxis: { title: "Experience" }
-        }
-      }, { displayModeBar:false });
-    });
-  </script>
+  <!-- 2️⃣ 你的 3D 程式（不能放在 head） -->
+  <script src="interactive3d.js"></script>
 
 </body>
 </html>
