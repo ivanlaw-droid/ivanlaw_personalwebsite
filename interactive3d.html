@@ -8,9 +8,6 @@
   <!-- 全站樣式 -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Plotly 3D (新穩定版) -->
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-
   <!-- 這一頁專用樣式 -->
   <style>
     html, body {
@@ -22,14 +19,13 @@
         "Noto Sans JP", sans-serif;
     }
 
-    /* 跟 map 一樣的 page 寬度 */
     .page-shell-3d {
       max-width: 1100px;
       margin: 24px auto 64px;
       padding: 0 20px;
     }
 
-    /* nav 下方的全站快捷鍵（位置、造型參考 map） */
+    /* nav 下方快捷鍵（位置跟 map 一樣，在右上） */
     .page-shortcuts {
       max-width: 1100px;
       margin: 10px auto 0;
@@ -110,7 +106,7 @@
     /* 3D chart 容器 */
     #skill-3d-chart {
       width: 100%;
-      height: 420px;
+      height: 420px;              /* 固定高度，避免 0 高度 */
       margin-top: 14px;
       border-radius: 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
@@ -124,7 +120,7 @@
       color: #9a8f82;
     }
 
-    /* 延伸內容：三軸解說的小卡 */
+    /* 三軸解說小卡 */
     .axes-grid {
       margin-top: 22px;
       display: grid;
@@ -162,7 +158,6 @@
       margin: 0;
     }
 
-    /* 延伸內容：註解一行，連結到你的作品 */
     .universe-footnote {
       margin-top: 18px;
       font-size: 13px;
@@ -230,7 +225,7 @@
     </ul>
   </nav>
 
-  <!-- nav 下方，右上角快捷鍵（和 map 位置一致） -->
+  <!-- nav 下方，右上角快捷鍵 -->
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
@@ -261,7 +256,7 @@
         different angles of this “skill universe”.
       </p>
 
-      <!-- 延伸內容：三軸解說 -->
+      <!-- 三軸解說 -->
       <div class="axes-grid">
         <article class="axis-card">
           <div class="axis-label">Axis X</div>
@@ -308,10 +303,19 @@
     </section>
   </main>
 
-  <!-- 3D Plot 程式 -->
+  <!-- Plotly：放在 body 最後，確保載入完成 -->
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+  <!-- 3D Plot 程式：等整個頁面 load 完成才畫 -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const skills = [
+    window.addEventListener("load", function () {
+      var container = document.getElementById("skill-3d-chart");
+      if (!container || typeof Plotly === "undefined") {
+        console.error("3D chart container or Plotly not ready.");
+        return;
+      }
+
+      var skills = [
         { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
         { name: "Photography",      x: 3, y: 2, z: 6, size: 20, color: "#f97316" },
         { name: "Documentary Film", x: 1, y: 3, z: 7, size: 22, color: "#16a34a" },
@@ -320,17 +324,17 @@
         { name: "Data / Info Viz",  x: 6, y: 3, z: 5, size: 18, color: "#0ea5e9" }
       ];
 
-      const trace = {
-        x: skills.map(d => d.x),
-        y: skills.map(d => d.y),
-        z: skills.map(d => d.z),
+      var trace = {
+        x: skills.map(function (d) { return d.x; }),
+        y: skills.map(function (d) { return d.y; }),
+        z: skills.map(function (d) { return d.z; }),
         mode: "markers+text",
         type: "scatter3d",
-        text: skills.map(d => d.name),
+        text: skills.map(function (d) { return d.name; }),
         textposition: "top center",
         marker: {
-          size: skills.map(d => d.size),
-          color: skills.map(d => d.color),
+          size: skills.map(function (d) { return d.size; }),
+          color: skills.map(function (d) { return d.color; }),
           opacity: 0.9
         },
         hovertemplate:
@@ -340,21 +344,37 @@
           "Experience: %{z}<extra></extra>"
       };
 
-      const layout = {
+      var layout = {
         margin: { l: 0, r: 0, t: 0, b: 0 },
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         scene: {
-          xaxis: { title: "Creativity", gridcolor: "#d1d5db", zerolinecolor: "#e5e7eb" },
-          yaxis: { title: "Technical skill", gridcolor: "#d1d5db", zerolinecolor: "#e5e7eb" },
-          zaxis: { title: "Experience", gridcolor: "#d1d5db", zerolinecolor: "#e5e7eb" },
+          bgcolor: "rgba(224,242,254,0.9)",   // 淺藍背景，確保看得到
+          xaxis: {
+            title: "Creativity",
+            gridcolor: "#d1d5db",
+            zerolinecolor: "#e5e7eb",
+            showbackground: false
+          },
+          yaxis: {
+            title: "Technical skill",
+            gridcolor: "#d1d5db",
+            zerolinecolor: "#e5e7eb",
+            showbackground: false
+          },
+          zaxis: {
+            title: "Experience",
+            gridcolor: "#d1d5db",
+            zerolinecolor: "#e5e7eb",
+            showbackground: false
+          },
           camera: {
             eye: { x: 1.6, y: 1.4, z: 1.5 }
           }
         }
       };
 
-      Plotly.newPlot("skill-3d-chart", [trace], layout, {
+      Plotly.newPlot(container, [trace], layout, {
         responsive: true,
         displayModeBar: false
       });
