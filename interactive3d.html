@@ -10,7 +10,8 @@
 
   <!-- 這一頁專用樣式 -->
   <style>
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -62,14 +63,6 @@
       transform: translateY(-1px);
     }
 
-    /* 目前頁面：Data View 高亮 */
-    .shortcut-pill.is-active {
-      background: #111827;
-      border-color: #111827;
-      color: #f9fafb;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.35);
-    }
-
     /* 3D 宇宙主卡片 */
     .universe-card {
       background: #fffaf6;
@@ -114,7 +107,7 @@
     /* 3D chart 容器 */
     #skill-3d-chart {
       width: 100%;
-      height: 420px;              /* 固定高度，避免 0 高度 */
+      height: 420px; /* 固定高度，避免 0 高度 */
       margin-top: 14px;
       border-radius: 18px;
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
@@ -224,7 +217,7 @@
   <!-- NAV：跟 index / map 一致 -->
   <nav class="main-nav">
     <div class="logo">
-      <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
+      <a href="index.html" style="text-decoration: none; color: inherit;">Ivan&nbsp;Law</a>
     </div>
     <ul>
       <li><a href="index.html#about">About</a></li>
@@ -237,7 +230,7 @@
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
-      <a href="interactive3d.html" class="shortcut-pill is-active">Data View</a>
+      <a href="interactive3d.html" class="shortcut-pill" style="background:#111827;color:#f9fafb;border-color:#111827;">Data View</a>
       <a href="map.html" class="shortcut-pill">Travel Map</a>
     </div>
   </div>
@@ -311,12 +304,12 @@
     </section>
   </main>
 
-  <!-- Plotly：放在 body 最後，確保載入完成 -->
+  <!-- Plotly 只保留這一行 -->
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
-  <!-- 3D Plot 程式：等整個頁面 load 完成才畫 -->
+  <!-- 3D Plot 程式 -->
   <script>
-    window.addEventListener("load", function () {
+    document.addEventListener("DOMContentLoaded", function () {
       var container = document.getElementById("skill-3d-chart");
       if (!container || typeof Plotly === "undefined") {
         console.error("3D chart container or Plotly not ready.");
@@ -357,7 +350,7 @@
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         scene: {
-          bgcolor: "rgba(224,242,254,0.9)",   // 淺藍背景
+          bgcolor: "rgba(224,242,254,0.9)",
           xaxis: {
             title: "Creativity",
             gridcolor: "#d1d5db",
