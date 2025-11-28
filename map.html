@@ -381,33 +381,61 @@
         Travel map · places that quietly shape my visual storytelling.
       </p>
 
-      <div class="map-layout">
-        <div class="map-text">
-          <p>
-            This map marks the cities that appear in my photos and short films — 
-            from everyday streets in Hong Kong to quiet corners in Seoul and Tokyo.
-          </p>
-          <p>
-            Each dot is a small story: home, journeys I’ve already made, 
-            or places I’d love to film in next.
-          </p>
+     <div class="map-layout">
 
-          <div class="map-legend">
-            <div class="legend-item">
-              <span class="legend-dot legend-home"></span>
-              <span>Home base / lived&nbsp;in</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot legend-travel"></span>
-              <span>Visited &amp; photographed</span>
-            </div>
-            <div class="legend-item">
-              <span class="legend-dot legend-dream"></span>
-              <span>Future project destination</span>
-            </div>
-          </div>
-        </div>
+  <!-- 左邊文字 -->
+  <div class="map-text">
+    <p>
+      This map marks the cities that appear in my photos and short films — 
+      from everyday streets in Hong Kong to quiet corners in Seoul and Tokyo.
+    </p>
+    <p>
+      Each dot is a small story: home, journeys I’ve already made, 
+      or places I’d love to film in next.
+    </p>
 
+    <div class="map-legend">
+      <div class="legend-item">
+        <span class="legend-dot legend-home"></span>
+        <span>Home base / lived&nbsp;in</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot legend-travel"></span>
+        <span>Visited &amp; photographed</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-dot legend-dream"></span>
+        <span>Future project destination</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右邊地圖 + 快捷鍵 -->
+  <div class="map-visual">
+
+    <!-- ⭐ 右上角快捷鍵（一定會出現） -->
+    <nav class="map-quick-links">
+      <a href="timeline.html" class="map-chip">
+        <span class="map-chip-tag">Timeline</span>
+        <span class="map-chip-label">成長軌跡</span>
+      </a>
+
+      <a href="interactive3d.html" class="map-chip">
+        <span class="map-chip-tag">3D</span>
+        <span class="map-chip-label">城市視角</span>
+      </a>
+
+      <a href="index.html#works" class="map-chip">
+        <span class="map-chip-tag">Stats</span>
+        <span class="map-chip-label">作品數據</span>
+      </a>
+    </nav>
+
+    <!-- 地圖 SVG -->
+    <svg id="map" width="620" height="380"></svg>
+
+  </div>
+</div>
         <!-- 👉 地圖區 + 快捷鍵 -->
         <div class="map-visual">
           <nav class="map-quick-links">
