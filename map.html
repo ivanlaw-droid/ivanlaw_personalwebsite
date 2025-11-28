@@ -406,14 +406,52 @@
               the space between buildings and sky.
             </p>
           </div>
-          <div class="map-feature-photo">
-            <img src="hero.jpg" alt="Seoul cathedral photo" />
-            <div class="map-feature-thumbs">
-              <img src="hero.jpg" alt="Seoul detail 1" />
-              <img src="hero.jpg" alt="Seoul detail 2" />
-              <img src="hero.jpg" alt="Seoul detail 3" />
-            </div>
-          </div>
+         <div class="map-feature-photo">
+  <!-- 主圖：初始先用噴泉＋主樓 -->
+  <img
+    id="feature-main-photo"
+    src="hero_seoul_fountain.jpg"
+    alt="Seoul campus – fountain and main building"
+  />
+
+  <div class="map-feature-thumbs">
+    <!-- Thumb 1：行人小路 -->
+    <button
+      class="map-thumb is-active"
+      type="button"
+      data-full="hero_seoul_fountain.jpg"
+    >
+      <img
+        src="hero_seoul_fountain.jpg"
+        alt="Seoul campus – fountain and colonnade"
+      />
+    </button>
+
+    <!-- Thumb 2：秋天樹蔭小路 -->
+    <button
+      class="map-thumb"
+      type="button"
+      data-full="hero_seoul_path.jpg"
+    >
+      <img
+        src="hero_seoul_path.jpg"
+        alt="Seoul campus – autumn trees and walking path"
+      />
+    </button>
+
+    <!-- Thumb 3：紅葉＋校舍正門（直幅） -->
+    <button
+      class="map-thumb"
+      type="button"
+      data-full="hero_seoul_gate.jpg"
+    >
+      <img
+        src="hero_seoul_gate.jpg"
+        alt="Seoul campus – main entrance framed by maple leaves"
+      />
+    </button>
+  </div>
+</div>
         </div>
 
         
@@ -461,6 +499,29 @@
         </div>
       </div>
     </section>
+    <script>
+  // Featured journey 縮圖切換主圖
+  document.addEventListener("DOMContentLoaded", function () {
+    var main = document.getElementById("feature-main-photo");
+    var thumbs = document.querySelectorAll(".map-thumb");
+
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener("click", function () {
+        var fullSrc = thumb.getAttribute("data-full");
+        if (!fullSrc || !main) return;
+
+        // 換主圖
+        main.src = fullSrc;
+
+        // 更新 active 樣式
+        thumbs.forEach(function (t) {
+          t.classList.remove("is-active");
+        });
+        thumb.classList.add("is-active");
+      });
+    });
+  });
+</script>
   </main>
 
   <script src="map.js"></script>
