@@ -10,13 +10,8 @@
 
   <!-- 這一頁專用樣式 -->
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+    body {
       background: #f7f3ef;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Noto Sans JP", sans-serif;
     }
 
     .page-shell-3d {
@@ -25,7 +20,7 @@
       padding: 0 20px;
     }
 
-    /* nav 下方快捷鍵（和 map 一樣，右上） */
+    /* nav 下方快捷鍵（位置跟 map 一樣，在右上） */
     .page-shortcuts {
       max-width: 1100px;
       margin: 10px auto 0;
@@ -55,21 +50,21 @@
       white-space: nowrap;
     }
 
-    .shortcut-pill:hover {
+    .shortcut-pill.is-active {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
+    }
+
+    .shortcut-pill:hover:not(.is-active) {
       background: #e0f2fe;
       border-color: #60a5fa;
       color: #1d4ed8;
       transform: translateY(-1px);
     }
 
-    .shortcut-pill.is-active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-      box-shadow: 0 14px 28px rgba(15, 23, 42, 0.4);
-    }
-
-    /* 主卡片 */
+    /* 3D 宇宙主卡片 */
     .universe-card {
       background: #fffaf6;
       border-radius: 22px;
@@ -110,8 +105,8 @@
       line-height: 1.7;
     }
 
-    /* 3D chart 容器 */
-    #skill-3d-chart {
+    /* 3D chart 容器：注意 id = chart3D */
+    #chart3D {
       width: 100%;
       height: 420px;
       margin-top: 14px;
@@ -119,19 +114,6 @@
       box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
       background: radial-gradient(circle at 50% 0, #e0f2fe, #eef2ff 55%, #e5e7eb);
       overflow: hidden;
-    }
-
-    /* 🚨 強制讓 Plotly 顯示出來，避免被全局 CSS 隱藏 */
-    #skill-3d-chart .js-plotly-plot {
-      display: block !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-    #skill-3d-chart .js-plotly-plot svg,
-    #skill-3d-chart .js-plotly-plot canvas {
-      opacity: 1 !important;
-      visibility: visible !important;
-      filter: none !important;
     }
 
     .universe-note {
@@ -194,7 +176,7 @@
       flex-wrap: wrap;
     }
 
-    .back-link {
+    .back-link-btn {
       font-size: 13px;
       padding: 8px 14px;
       border-radius: 999px;
@@ -208,7 +190,7 @@
       transition: all 0.2s ease;
     }
 
-    .back-link:hover {
+    .back-link-btn:hover {
       background: #e5f3ff;
       border-color: #60a5fa;
       color: #1d4ed8;
@@ -222,7 +204,7 @@
     }
 
     @media (max-width: 900px) {
-      #skill-3d-chart {
+      #chart3D {
         height: 360px;
       }
       .axes-grid {
@@ -268,8 +250,8 @@
         </p>
       </header>
 
-      <!-- 3D 圖 -->
-      <div id="skill-3d-chart"></div>
+      <!-- 3D 圖容器：id = chart3D -->
+      <div id="chart3D"></div>
 
       <p class="universe-note">
         Tip: use your mouse or trackpad to rotate, scroll to zoom, and drag to explore
@@ -314,91 +296,18 @@
       </p>
 
       <div class="universe-footer-row">
-        <a href="index.html#works" class="back-link">← Back to Home</a>
+        <a href="index.html#works" class="back-link-btn">← Back to Home</a>
         <div class="footer-right-links">
-          <a href="timeline.html" class="back-link">View growth timeline</a>
-          <a href="map.html" class="back-link">Open travel map</a>
+          <a href="timeline.html" class="back-link-btn">View growth timeline</a>
+          <a href="map.html" class="back-link-btn">Open travel map</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Plotly：放在 body 最後 -->
+  <!-- Plotly 先載入 -->
   <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-
-  <!-- 3D Plot 程式：內嵌，避免跟 external JS 混淆 -->
-  <script>
-    window.addEventListener("load", function () {
-      var container = document.getElementById("skill-3d-chart");
-      if (!container || typeof Plotly === "undefined") {
-        console.error("3D chart container or Plotly not ready.");
-        return;
-      }
-
-      var skills = [
-        { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
-        { name: "Creative Media",   x: 3, y: 1, z: 6, size: 22, color: "#7c3aed" },
-        { name: "AI Tools",         x: 6, y: 2, z: 3, size: 20, color: "#0ea5e9" },
-        { name: "Visualization",    x: 1, y: 3, z: 7, size: 24, color: "#22c55e" },
-        { name: "GitHub Projects",  x: 4, y: 6, z: 2, size: 16, color: "#f97316" },
-        { name: "Arduino / Making", x: 5, y: 4, z: 6, size: 20, color: "#e11d48" }
-      ];
-
-      var trace = {
-        x: skills.map(function (d) { return d.x; }),
-        y: skills.map(function (d) { return d.y; }),
-        z: skills.map(function (d) { return d.z; }),
-        mode: "markers+text",
-        type: "scatter3d",
-        text: skills.map(function (d) { return d.name; }),
-        textposition: "top center",
-        marker: {
-          size: skills.map(function (d) { return d.size; }),
-          color: skills.map(function (d) { return d.color; }),
-          opacity: 0.9
-        },
-        hovertemplate:
-          "<b>%{text}</b><br>" +
-          "Creativity: %{x}<br>" +
-          "Technical skill: %{y}<br>" +
-          "Experience: %{z}<extra></extra>"
-      };
-
-      var layout = {
-        margin: { l: 0, r: 0, t: 0, b: 0 },
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(0,0,0,0)",
-        scene: {
-          bgcolor: "rgba(224,242,254,0.9)",
-          xaxis: {
-            title: "Creativity",
-            gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
-          },
-          yaxis: {
-            title: "Technical skill",
-            gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
-          },
-          zaxis: {
-            title: "Experience",
-            gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
-          },
-          camera: {
-            eye: { x: 1.6, y: 1.4, z: 1.5 }
-          }
-        }
-      };
-
-      Plotly.newPlot(container, [trace], layout, {
-        responsive: true,
-        displayModeBar: false
-      });
-    });
-  </script>
+  <!-- 3D 圖邏輯放在 external JS -->
+  <script src="interactive3d.js"></script>
 </body>
 </html>
