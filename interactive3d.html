@@ -2,72 +2,252 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ivan Law • 3D Creative Space</title>
+  <title>3D Skills • Ivan Law</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  
-  <link href="style.css" rel="stylesheet" />
-
-  
+  <!-- Plotly 3D Library -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
   <style>
-  
-    .page-title {
-      margin-bottom: 8px;
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
+      background: #f7f3ef;
+      color: #1f2933;
     }
-    .page-subtitle {
-      color: #555;
-      line-height: 1.6;
-      max-width: 720px;
+
+    /* NAV – 和 index / map 一致 */
+    .main-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 6vw;
+      background: rgba(247, 243, 239, 0.94);
+      border-bottom: 1px solid rgba(228, 215, 198, 0.7);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
+
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .main-nav a {
+      border: none;
+      background: none;
+      font: inherit;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 999px;
+      color: #6b7280;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.18s ease;
+      text-decoration: none;
+    }
+
+    .main-nav a:hover {
+      background: rgba(196, 91, 91, 0.09);
+      color: #c45b5b;
+      transform: translateY(-1px);
+    }
+
+    /* Page shell */
+    .page-shell {
+      max-width: 1100px;
+      margin: 32px auto 64px;
+      padding: 0 20px;
+    }
+
+    .skill-card {
+      background: #fffaf6;
+      border-radius: 22px;
+      padding: 28px 28px 32px;
+      border: 1px solid rgba(228, 215, 198, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .skill-title {
+      font-family: "Playfair Display", serif;
+      font-size: 26px;
+      margin: 0 0 4px;
+      color: #111827;
+    }
+
+    .skill-subtitle {
+      margin: 0;
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    /* 右上角小 badge / 快捷鍵 */
+    .skill-quick-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .skill-pill {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(241, 245, 249, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #475569;
+      text-decoration: none;
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .skill-pill:hover {
+      background: #e0f2fe;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    /* 3D chart 容器 */
     #chart3D {
       width: 100%;
-      height: 520px;
+      height: 70vh;
+      margin-top: 10px;
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      background: radial-gradient(circle at 50% 0, #e0f2fe, #eef2ff 55%, #e5e7eb);
     }
+
+    .skill-footer-note {
+      font-size: 12px;
+      color: #9a8f82;
+      margin-top: 10px;
+    }
+
+    .back-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
     .back-link {
-      display: inline-block;
-      margin-top: 18px;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(248, 250, 252, 0.95);
+      color: #374151;
       text-decoration: none;
-      font-size: 14px;
-      color: #6a11cb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .back-link:hover {
+      background: #e5f3ff;
+      border-color: #60a5fa;
+      color: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .back-row-right {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .skill-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      #chart3D {
+        height: 60vh;
+      }
     }
   </style>
 </head>
 
 <body>
-  
+  <!-- NAV -->
   <nav class="main-nav">
-    <div class="logo">Ivan Law</div>
+    <div class="logo">
+      <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
+    </div>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="timeline.html">Timeline</a></li>
-      <li><a href="my_work.html">Data View</a></li>
-      <li><a href="map.html">Travel Map</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#works">Works</a></li>
+      <li><a href="index.html#cv">CV</a></li>
     </ul>
   </nav>
 
-  <div class="page-wrapper">
-    <section class="page-section">
-      <h1 class="page-title">🌐 3D Creative Universe</h1>
-      <p class="page-subtitle">
-        Drag, rotate and zoom to explore how my skills, interests and experience
-        connect in 3D space. Each point is a different creative dimension –
-        from web design and photography to animation and social projects.
+  <main class="page-shell">
+    <section class="skill-card">
+      <div class="skill-header">
+        <div>
+          <h1 class="skill-title">3D map of my skills</h1>
+          <p class="skill-subtitle">
+            Drag, rotate and zoom to see how design, storytelling and tech connect in my work.
+          </p>
+        </div>
+
+        <!-- 右上角三個英文字快捷鍵 -->
+        <div class="skill-quick-links">
+          <a href="timeline.html" class="skill-pill">Timeline</a>
+          <a href="map.html" class="skill-pill">Travel map</a>
+          <a href="index.html#works" class="skill-pill">Selected works</a>
+        </div>
+      </div>
+
+      <!-- 3D chart -->
+      <div id="chart3D"></div>
+
+      <p class="skill-footer-note">
+        Each dot is a combination of creativity, technical skill and experience – the closer they are,
+        the more they work together in my projects.
       </p>
 
-      <div id="chart3D" class="chart-container"></div>
-
-      <a href="index.html" class="back-link">🏠 Back to Home</a>
+      <div class="back-row">
+        <a href="index.html#works" class="back-link">
+          ← Back to main portfolio
+        </a>
+        <div class="back-row-right">
+          <a href="map.html" class="back-link">Travel map</a>
+          <a href="timeline.html" class="back-link">Growth timeline</a>
+        </div>
+      </div>
     </section>
-  </div>
+  </main>
 
-  <footer class="site-footer">
-    © <span id="year"></span> Ivan Law · Visual Storyteller
-  </footer>
-
+  <!-- 3D chart script -->
   <script src="interactive3d.js"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
