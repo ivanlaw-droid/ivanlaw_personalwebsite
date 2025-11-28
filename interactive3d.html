@@ -306,11 +306,12 @@
     </section>
   </main>
 
-  <!-- Plotly 放在 body 最後 -->
+    <!-- Plotly 放在 body 最後 -->
   <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 
   <script>
     window.addEventListener("load", function () {
+      // 安全檢查
       if (typeof Plotly === "undefined") {
         console.error("Plotly not loaded");
         return;
@@ -322,6 +323,7 @@
         return;
       }
 
+      // 資料點（跟你之前的 skill 類似）
       var skills = [
         { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
         { name: "Photography",      x: 3, y: 2, z: 6, size: 20, color: "#f97316" },
@@ -339,10 +341,19 @@
         type: "scatter3d",
         text: skills.map(function (d) { return d.name; }),
         textposition: "top center",
+        textfont: {
+          color: "#111827",
+          size: 11
+        },
         marker: {
           size: skills.map(function (d) { return d.size; }),
           color: skills.map(function (d) { return d.color; }),
-          opacity: 0.9
+          opacity: 1,
+          line: {
+            color: "#111827",
+            width: 1
+          },
+          symbol: "circle"
         },
         hovertemplate:
           "<b>%{text}</b><br>" +
@@ -356,24 +367,36 @@
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         scene: {
-          bgcolor: "rgba(224,242,254,0.9)",
+          bgcolor: "#eef2ff",            // 淺藍背景，對比明顯
           xaxis: {
             title: "Creativity",
+            range: [0, 7],              // 強制範圍，避免太縮
+            showgrid: true,
             gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
+            zeroline: true,
+            zerolinecolor: "#9ca3af",
+            tickfont: { color: "#4b5563" },
+            titlefont: { color: "#374151" }
           },
           yaxis: {
             title: "Technical skill",
+            range: [0, 7],
+            showgrid: true,
             gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
+            zeroline: true,
+            zerolinecolor: "#9ca3af",
+            tickfont: { color: "#4b5563" },
+            titlefont: { color: "#374151" }
           },
           zaxis: {
             title: "Experience",
+            range: [0, 7],
+            showgrid: true,
             gridcolor: "#d1d5db",
-            zerolinecolor: "#e5e7eb",
-            showbackground: false
+            zeroline: true,
+            zerolinecolor: "#9ca3af",
+            tickfont: { color: "#4b5563" },
+            titlefont: { color: "#374151" }
           },
           camera: {
             eye: { x: 1.6, y: 1.4, z: 1.5 }
@@ -381,11 +404,15 @@
         }
       };
 
-      Plotly.newPlot(container, [trace], layout, {
+      var config = {
         responsive: true,
         displayModeBar: false
-      });
+      };
+
+      Plotly.newPlot(container, [trace], layout, config);
     });
   </script>
+</body>
+</html>
 </body>
 </html>
