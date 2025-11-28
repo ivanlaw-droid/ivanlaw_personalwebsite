@@ -3,7 +3,7 @@
 const width = 620;
 const height = 380;
 
-
+/
 const svg = d3
   .select("#map")
   .attr("viewBox", "0 0 " + width + " " + height)
@@ -52,7 +52,7 @@ d3.json(worldGeoJSON)
       .attr("stroke", "#d1bfae")
       .attr("stroke-width", 0.5);
 
-   
+    
     const graticule = d3.geoGraticule();
     svg.append("path")
       .datum(graticule())
@@ -84,7 +84,7 @@ d3.json(worldGeoJSON)
       })
       .attr("stroke", "rgba(148,163,184,0.8)")
       .attr("stroke-width", 1.4)
-      .attr("opacity", 1);  
+      .attr("opacity", 1);   
 
     
     routes.each(function () {
@@ -128,14 +128,14 @@ d3.json(worldGeoJSON)
         const length = this.getTotalLength();
         d3.select(this)
           .transition()
-          .delay(400 + i * 700)   
+          .delay(400 + i * 700)  
           .duration(2800)         
           .ease(d3.easeCubicOut)
           .attr("stroke-dashoffset", 0);
       });
     }
 
- 
+
     points.append("title")
       .text(function (d) { return d.name + ", " + d.country; });
 
