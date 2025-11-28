@@ -62,6 +62,14 @@
       transform: translateY(-1px);
     }
 
+    /* 目前頁面：Data View 高亮 */
+    .shortcut-pill.is-active {
+      background: #111827;
+      border-color: #111827;
+      color: #f9fafb;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.35);
+    }
+
     /* 3D 宇宙主卡片 */
     .universe-card {
       background: #fffaf6;
@@ -229,7 +237,7 @@
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
-      <a href="interactive3d.html" class="shortcut-pill">Data View</a>
+      <a href="interactive3d.html" class="shortcut-pill is-active">Data View</a>
       <a href="map.html" class="shortcut-pill">Travel Map</a>
     </div>
   </div>
@@ -349,7 +357,7 @@
         paper_bgcolor: "rgba(0,0,0,0)",
         plot_bgcolor: "rgba(0,0,0,0)",
         scene: {
-          bgcolor: "rgba(224,242,254,0.9)",   // 淺藍背景，確保看得到
+          bgcolor: "rgba(224,242,254,0.9)",   // 淺藍背景
           xaxis: {
             title: "Creativity",
             gridcolor: "#d1d5db",
