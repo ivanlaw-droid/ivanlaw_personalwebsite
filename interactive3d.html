@@ -8,10 +8,14 @@
   <!-- 全站樣式 -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- 這一頁專用樣式 -->
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
       background: #f7f3ef;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
     }
 
     .page-shell-3d {
@@ -20,10 +24,10 @@
       padding: 0 20px;
     }
 
-    /* nav 下方快捷鍵（位置跟 map 一樣，在右上） */
+    /* -- NAV 下方快捷鍵（與 map.html 一致） -- */
     .page-shortcuts {
       max-width: 1100px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       padding: 0 20px;
       display: flex;
       justify-content: flex-end;
@@ -32,45 +36,37 @@
     .shortcut-group {
       display: flex;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
     .shortcut-pill {
       font-size: 11px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
-      border: 1px solid rgba(214, 211, 209, 0.9);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(214,211,209,0.9);
       color: #6b7280;
       text-decoration: none;
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
-      transition: all 0.2s ease;
-      white-space: nowrap;
+      box-shadow: 0 10px 22px rgba(15,23,42,0.12);
+      transition: all .2s ease;
     }
 
-    .shortcut-pill.is-active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
-    }
-
-    .shortcut-pill:hover:not(.is-active) {
+    .shortcut-pill:hover,
+    .shortcut-pill.active {
       background: #e0f2fe;
-      border-color: #60a5fa;
       color: #1d4ed8;
+      border-color: #60a5fa;
       transform: translateY(-1px);
     }
 
-    /* 3D 宇宙主卡片 */
+    /* -- 主卡片 -- */
     .universe-card {
       background: #fffaf6;
       border-radius: 22px;
-      padding: 28px 26px 26px;
-      border: 1px solid rgba(228, 215, 198, 0.9);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      padding: 28px 26px 30px;
+      border: 1px solid rgba(228,215,198,0.9);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.08);
     }
 
     .universe-header {
@@ -86,15 +82,11 @@
       gap: 10px;
     }
 
-    .universe-icon {
-      font-size: 24px;
-    }
-
     .universe-title {
       font-family: "Playfair Display", serif;
       font-size: 26px;
-      margin: 0 0 2px;
-      color: #111827;
+      margin: 0;
+      color: #1f2933;
     }
 
     .universe-subtitle {
@@ -105,15 +97,14 @@
       line-height: 1.7;
     }
 
-    /* 3D chart 容器：注意 id = chart3D */
-    #chart3D {
+    #skill-3d-chart {
       width: 100%;
       height: 420px;
       margin-top: 14px;
       border-radius: 18px;
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-      background: radial-gradient(circle at 50% 0, #e0f2fe, #eef2ff 55%, #e5e7eb);
       overflow: hidden;
+      background: radial-gradient(circle at 50% 0, #dbeafe, #eff6ff 55%, #e5e7eb);
+      box-shadow: 0 18px 40px rgba(15,23,42,0.12);
     }
 
     .universe-note {
@@ -122,25 +113,24 @@
       color: #9a8f82;
     }
 
-    /* 三軸解說小卡 */
     .axes-grid {
       margin-top: 22px;
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 14px;
     }
 
     .axis-card {
-      background: rgba(255, 250, 246, 0.96);
+      background: rgba(255,250,246,0.96);
       border-radius: 16px;
-      padding: 14px 14px 16px;
-      border: 1px solid rgba(228, 215, 198, 0.9);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+      padding: 14px;
+      border: 1px solid rgba(228,215,198,0.9);
+      box-shadow: 0 10px 24px rgba(15,23,42,0.04);
     }
 
     .axis-label {
       font-size: 12px;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #9a8f82;
       margin-bottom: 4px;
@@ -156,66 +146,14 @@
     .axis-body {
       font-size: 13px;
       line-height: 1.6;
-      color: #4b5563;
-      margin: 0;
-    }
-
-    .universe-footnote {
-      margin-top: 18px;
-      font-size: 13px;
-      color: #6b7280;
-      line-height: 1.7;
-    }
-
-    .universe-footer-row {
-      margin-top: 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .back-link-btn {
-      font-size: 13px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: rgba(248, 250, 252, 0.95);
-      color: #374151;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-
-    .back-link-btn:hover {
-      background: #e5f3ff;
-      border-color: #60a5fa;
-      color: #1d4ed8;
-      transform: translateY(-1px);
-    }
-
-    .footer-right-links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 900px) {
-      #chart3D {
-        height: 360px;
-      }
-      .axes-grid {
-        grid-template-columns: 1fr;
-      }
+      color: #444;
     }
   </style>
 </head>
 
 <body>
-  <!-- NAV：跟 index / map 一致 -->
+
+  <!-- NAV (全站一致) -->
   <nav class="main-nav">
     <div class="logo">
       <a href="index.html" style="text-decoration:none; color:inherit;">Ivan&nbsp;Law</a>
@@ -227,45 +165,42 @@
     </ul>
   </nav>
 
-  <!-- nav 下方，右上角快捷鍵 -->
+  <!-- 快捷鍵（右上角）-->
   <div class="page-shortcuts">
     <div class="shortcut-group">
       <a href="timeline.html" class="shortcut-pill">Timeline</a>
-      <a href="interactive3d.html" class="shortcut-pill is-active">Data View</a>
+      <a href="interactive3d.html" class="shortcut-pill active">Data View</a>
       <a href="map.html" class="shortcut-pill">Travel Map</a>
     </div>
   </div>
 
+  <!-- 內容 -->
   <main class="page-shell-3d">
     <section class="universe-card">
+
       <header class="universe-header">
         <div class="universe-title-row">
-          <span class="universe-icon">🌐</span>
+          <span style="font-size:24px;">🌐</span>
           <h1 class="universe-title">3D Creative Universe</h1>
         </div>
         <p class="universe-subtitle">
-          A 3D map of how my skills, interests and experience connect with each other.
-          Drag, rotate and zoom to see how web design, photography, documentary film,
-          animation and data visuals sit in the same creative space.
+          A 3D map showing how my skills, interests and experience relate to each other.
+          Drag, rotate and zoom to explore the creative landscape.
         </p>
       </header>
 
-      <!-- 3D 圖容器：id = chart3D -->
-      <div id="chart3D"></div>
+      <!-- ⭐⭐⭐ 3D 圖 -->
+      <div id="skill-3d-chart"></div>
 
-      <p class="universe-note">
-        Tip: use your mouse or trackpad to rotate, scroll to zoom, and drag to explore
-        different angles of this “skill universe”.
-      </p>
+      <p class="universe-note">Tip: Drag to rotate · Scroll to zoom · Drag to explore.</p>
 
-      <!-- 三軸解說 -->
+      <!-- 下方三卡 -->
       <div class="axes-grid">
         <article class="axis-card">
           <div class="axis-label">Axis X</div>
           <div class="axis-title">Creativity</div>
           <p class="axis-body">
-            How experimental and expressive a skill is. Documentary film and animation
-            sit higher here, while information design stays slightly more structured.
+            How expressive, conceptual or experimental the skill is.
           </p>
         </article>
 
@@ -273,8 +208,7 @@
           <div class="axis-label">Axis Y</div>
           <div class="axis-title">Technical Skill</div>
           <p class="axis-body">
-            How much technical craft is required – from camera work and editing to
-            compositing, 3D tools and web implementation.
+            How much technical mastery is required in real projects.
           </p>
         </article>
 
@@ -282,32 +216,57 @@
           <div class="axis-label">Axis Z</div>
           <div class="axis-title">Experience</div>
           <p class="axis-body">
-            How often I’ve used this skill in real projects: personal photo stories,
-            social projects, group work and visual experiments.
+            How often this skill is used in real work—photos, film, coding, design.
           </p>
         </article>
-      </div>
-
-      <p class="universe-footnote">
-        Points that sit closer together are skills I often combine in the same work –
-        for example, <strong>photography + documentary film</strong> for community
-        stories, or <strong>2D animation + graphic design</strong> for youth projects
-        and educational content.
-      </p>
-
-      <div class="universe-footer-row">
-        <a href="index.html#works" class="back-link-btn">← Back to Home</a>
-        <div class="footer-right-links">
-          <a href="timeline.html" class="back-link-btn">View growth timeline</a>
-          <a href="map.html" class="back-link-btn">Open travel map</a>
-        </div>
       </div>
     </section>
   </main>
 
-  <!-- Plotly 先載入 -->
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
-  <!-- 3D 圖邏輯放在 external JS -->
-  <script src="interactive3d.js"></script>
+  <!-- ⭐⭐⭐ 使用支援 3D 的最新 Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+
+  <!-- 3D Plot 程式 -->
+  <script>
+    window.addEventListener("load", function () {
+      var container = document.getElementById("skill-3d-chart");
+      if (!container) return;
+
+      var skills = [
+        { name: "Web Design",       x: 2, y: 4, z: 5, size: 18, color: "#2563eb" },
+        { name: "Creative Media",   x: 3, y: 1, z: 6, size: 22, color: "#7c3aed" },
+        { name: "AI Tools",         x: 6, y: 2, z: 3, size: 20, color: "#0ea5e9" },
+        { name: "Visualization",    x: 1, y: 3, z: 7, size: 24, color: "#22c55e" },
+        { name: "GitHub Projects",  x: 4, y: 6, z: 2, size: 16, color: "#f97316" },
+        { name: "Arduino / Making", x: 5, y: 4, z: 6, size: 20, color: "#e11d48" }
+      ];
+
+      Plotly.newPlot(container, [{
+        x: skills.map(s => s.x),
+        y: skills.map(s => s.y),
+        z: skills.map(s => s.z),
+        mode: "markers+text",
+        type: "scatter3d",
+        text: skills.map(s => s.name),
+        textposition: "top center",
+        marker: {
+          size: skills.map(s => s.size),
+          color: skills.map(s => s.color),
+          opacity: 0.9
+        }
+      }], {
+        margin: { l:0, r:0, t:0, b:0 },
+        paper_bgcolor: "rgba(0,0,0,0)",
+        plot_bgcolor: "rgba(0,0,0,0)",
+        scene: {
+          bgcolor: "rgba(224,242,254,0.9)",
+          xaxis: { title: "Creativity" },
+          yaxis: { title: "Technical Skill" },
+          zaxis: { title: "Experience" }
+        }
+      }, { displayModeBar:false });
+    });
+  </script>
+
 </body>
 </html>
