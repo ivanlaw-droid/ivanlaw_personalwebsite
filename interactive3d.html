@@ -358,21 +358,39 @@
       };
 
       var layout = {
-        margin: { l: 0, r: 0, t: 0, b: 0 },
-        scene: {
-          bgcolor: "rgba(224,242,254,0.9)",
-          xaxis: { title: "Creativity", gridcolor: "#d1d5db" },
-          yaxis: { title: "Technical skill", gridcolor: "#d1d5db" },
-          zaxis: { title: "Experience", gridcolor: "#d1d5db" },
-          camera: { eye: { x: 1.6, y: 1.4, z: 1.5 } }
-        }
-      };
-
-      Plotly.newPlot(el, [trace], layout, {
-        responsive: true,
-        displayModeBar: false
-      });
-    });
+  margin: { l: 0, r: 0, t: 0, b: 0 },
+  scene: {
+    bgcolor: "rgba(224,242,254,1)",
+    xaxis: {
+      title: "Creativity",
+      showgrid: true,
+      gridcolor: "#d1d5db",
+      zeroline: false,
+      showbackground: true,
+      backgroundcolor: "rgba(255,255,255,0.9)"
+    },
+    yaxis: {
+      title: "Technical skill",
+      showgrid: true,
+      gridcolor: "#d1d5db",
+      zeroline: false,
+      showbackground: true,
+      backgroundcolor: "rgba(255,255,255,0.9)"
+    },
+    zaxis: {
+      title: "Experience",
+      showgrid: true,
+      gridcolor: "#d1d5db",
+      zeroline: false,
+      showbackground: true,
+      backgroundcolor: "rgba(255,255,255,0.9)"
+    },
+    // camera 開局就少少斜視角，立體感大啲
+    camera: {
+      eye: { x: 1.8, y: 1.6, z: 1.3 }
+    }
+  }
+};
   </script>
 </body>
 </html>
