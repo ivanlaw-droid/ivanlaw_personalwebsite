@@ -94,15 +94,6 @@
       transform: rotate(-4deg);
     }
 
-    .map-card:hover #map {
-      transform: translateY(-2px);
-      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.16);
-    }
-
-    #map {
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
     .map-title {
       font-family: "Playfair Display", serif;
       font-size: 26px;
@@ -113,7 +104,54 @@
     .map-subtitle {
       font-size: 13px;
       color: #6b7280;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
+    }
+
+    /* 🔹 按鍵放在右上角 */
+    .map-header-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 14px;
+      margin-top: 2px;
+    }
+
+    .map-quick-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .map-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.18);
+      border: 1px solid rgba(240, 240, 240, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: 0.18s ease;
+      color: #374151;
+    }
+
+    .map-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.24);
+    }
+
+    .map-chip-icon {
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .map-chip-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .map-layout {
@@ -129,11 +167,6 @@
       color: #444;
     }
 
-    .map-text p {
-      margin: 0 0 10px;
-    }
-
-    /* Map legend */
     .map-legend {
       margin-top: 10px;
       font-size: 12px;
@@ -163,72 +196,10 @@
       box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
       background: radial-gradient(circle at 50% 0, #dbeafe, #eff6ff 55%, #e5e7eb);
       display: block;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    /* NEW: 地圖視覺容器 + 右上快捷鍵 */
-    .map-visual {
-      position: relative;
-    }
-
-    .map-quick-links {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      display: flex;
-      gap: 8px;
-      z-index: 10;
-    }
-
-    .map-chip {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 6px 10px;
-      border-radius: 999px;
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.92);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.2);
-      border: 1px solid rgba(235, 235, 235, 0.85);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: 0.18s ease;
-    }
-
-    .map-chip-tag {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.75;
-    }
-
-    .map-chip-label {
-      font-size: 11px;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    .map-chip:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 28px rgba(15, 23, 42, 0.25);
-    }
-
-    @media (max-width: 640px) {
-      .map-quick-links {
-        bottom: 12px;
-        top: auto;
-      }
-    }
-
-    /* Featured */
-    .map-extra {
-      margin-top: 32px;
-    }
-
-    .map-extra-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
+    /* Featured photo */
     .map-feature {
       background: #fffaf6;
       border-radius: 20px;
@@ -242,47 +213,33 @@
       margin-bottom: 22px;
     }
 
-    .map-feature-title {
-      font-family: "Playfair Display", serif;
-      font-size: 22px;
-      margin: 0 0 6px;
-      color: #1f2933;
-    }
-
-    .map-feature-sub {
-      font-size: 13px;
-      color: #6b7280;
-      margin: 0 0 8px;
-    }
-
-    .map-feature-copy {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #444;
-      margin: 0;
-    }
-
     .map-feature-photo img {
       width: 100%;
-      display: block;
       border-radius: 18px;
       object-fit: cover;
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
     }
 
     .map-feature-thumbs {
-      margin-top: 10px;
       display: flex;
       gap: 8px;
+      margin-top: 10px;
     }
 
-    .map-feature-thumbs img {
-      flex: 1;
-      height: 80px;
+    .map-thumb {
+      padding: 0;
+      border: none;
+      cursor: pointer;
       border-radius: 10px;
-      object-fit: cover;
-      display: block;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+      overflow: hidden;
+      opacity: 0.8;
+      transition: 0.2s;
+    }
+
+    .map-thumb:hover { opacity: 1; }
+
+    .map-thumb.is-active {
+      outline: 2px solid rgba(255, 255, 255, 0.9);
+      opacity: 1;
     }
 
     /* City grid */
@@ -296,63 +253,19 @@
     .city-card {
       background: rgba(255, 250, 246, 0.95);
       border-radius: 16px;
-      padding: 14px 14px 16px;
+      padding: 14px;
       border: 1px solid rgba(228, 215, 198, 0.9);
       box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
     }
 
-    .city-name {
-      font-size: 15px;
-      font-weight: 600;
-      margin: 0 0 4px;
-      color: #1f2933;
-    }
-
-    .city-tagline {
-      font-size: 12px;
-      color: #9a8f82;
-      margin: 0 0 8px;
-    }
-
-    .city-body {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #444;
-      margin: 0;
-    }
-
-    .city-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    .chip {
-      font-size: 11px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(231, 192, 167, 0.16);
-      border: 1px solid rgba(231, 192, 167, 0.8);
-      color: #7a5a4a;
-    }
-
     @media (max-width: 900px) {
-      .map-layout {
-        grid-template-columns: 1fr;
-      }
-      .map-feature {
-        grid-template-columns: 1fr;
-      }
-      .map-city-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      .map-layout { grid-template-columns: 1fr; }
+      .map-feature { grid-template-columns: 1fr; }
+      .map-city-grid { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 640px) {
-      .map-city-grid {
-        grid-template-columns: 1fr;
-      }
+      .map-city-grid { grid-template-columns: 1fr; }
     }
 
   </style>
@@ -381,175 +294,118 @@
         Travel map · places that quietly shape my visual storytelling.
       </p>
 
-     <div class="map-layout">
+      <!-- ⭐ 新版快捷鍵（右上角） -->
+      <div class="map-header-row">
+        <nav class="map-quick-links">
+          <a href="timeline.html" class="map-chip">
+            <span class="map-chip-icon">🕰️</span>
+            <span class="map-chip-text">Timeline</span>
+          </a>
 
-  <!-- 左邊文字 -->
-  <div class="map-text">
-    <p>
-      This map marks the cities that appear in my photos and short films — 
-      from everyday streets in Hong Kong to quiet corners in Seoul and Tokyo.
-    </p>
-    <p>
-      Each dot is a small story: home, journeys I’ve already made, 
-      or places I’d love to film in next.
-    </p>
+          <a href="interactive3d.html" class="map-chip">
+            <span class="map-chip-icon">🧭</span>
+            <span class="map-chip-text">3D City</span>
+          </a>
 
-    <div class="map-legend">
-      <div class="legend-item">
-        <span class="legend-dot legend-home"></span>
-        <span>Home base / lived&nbsp;in</span>
+          <a href="index.html#works" class="map-chip">
+            <span class="map-chip-icon">📊</span>
+            <span class="map-chip-text">Stats</span>
+          </a>
+        </nav>
       </div>
-      <div class="legend-item">
-        <span class="legend-dot legend-travel"></span>
-        <span>Visited &amp; photographed</span>
-      </div>
-      <div class="legend-item">
-        <span class="legend-dot legend-dream"></span>
-        <span>Future project destination</span>
-      </div>
-    </div>
-  </div>
 
-  <!-- 右邊地圖 + 快捷鍵 -->
-  <div class="map-visual">
+      <div class="map-layout">
+        <div class="map-text">
+          <p>
+            This map marks the cities that appear in my photos and short films — 
+            from everyday streets in Hong Kong to quiet corners in Seoul and Tokyo.
+          </p>
+          <p>
+            Each dot is a small story: home, journeys I’ve already made, 
+            or places I’d love to film in next.
+          </p>
 
-    <!-- ⭐ 右上角快捷鍵（一定會出現） -->
-    <nav class="map-quick-links">
-      <a href="timeline.html" class="map-chip">
-        <span class="map-chip-tag">Timeline</span>
-        <span class="map-chip-label">成長軌跡</span>
-      </a>
+          <div class="map-legend">
+            <div class="legend-item">
+              <span class="legend-dot legend-home"></span>
+              <span>Home base / lived in</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot legend-travel"></span>
+              <span>Visited &amp; photographed</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot legend-dream"></span>
+              <span>Future project destination</span>
+            </div>
+          </div>
+        </div>
 
-      <a href="interactive3d.html" class="map-chip">
-        <span class="map-chip-tag">3D</span>
-        <span class="map-chip-label">城市視角</span>
-      </a>
-
-      <a href="index.html#works" class="map-chip">
-        <span class="map-chip-tag">Stats</span>
-        <span class="map-chip-label">作品數據</span>
-      </a>
-    </nav>
-
-    <!-- 地圖 SVG -->
-    <svg id="map" width="620" height="380"></svg>
-
-  </div>
-</div>
-        <!-- 👉 地圖區 + 快捷鍵 -->
         <div class="map-visual">
-          <nav class="map-quick-links">
-            <a href="timeline.html" class="map-chip">
-              <span class="map-chip-tag">Timeline</span>
-              <span class="map-chip-label">成長軌跡</span>
-            </a>
-
-            <a href="interactive3d.html" class="map-chip">
-              <span class="map-chip-tag">3D</span>
-              <span class="map-chip-label">城市視角</span>
-            </a>
-
-            <a href="index.html#works" class="map-chip">
-              <span class="map-chip-tag">Stats</span>
-              <span class="map-chip-label">作品數據</span>
-            </a>
-          </nav>
-
           <svg id="map" width="620" height="380"></svg>
         </div>
       </div>
     </section>
 
-    <!-- Featured Seoul -->
+    <!-- Featured -->
     <section class="map-extra">
       <div class="map-extra-inner">
         <div class="map-feature">
           <div class="map-feature-text">
-            <h2 class="map-feature-title">
-              Featured journey: Seoul cathedrals &amp; quiet streets
-            </h2>
+            <h2 class="map-feature-title">Featured journey: Seoul quiet streets</h2>
             <p class="map-feature-sub">
-              在首爾慢慢行，留意教堂外牆、天空和街口的安靜瞬間。
+              Light, stone, windows, and quiet corners.
             </p>
             <p class="map-feature-copy">
-              A small photo series about how soft light touches stone and glass in Seoul.
-              Instead of big tourist views, I focus on small details — windows, doors and
-              the space between buildings and sky.
+              Instead of tourist attractions, I focus on soft light on walls, streets, and rooftops.
             </p>
           </div>
 
-          <!-- Featured photo + thumbs -->
           <div class="map-feature-photo">
-            <img
-              id="feature-main-photo"
-              src="hero_seoul_fountain.jpg"
-              alt="Seoul campus – fountain and main building"
-            />
+            <img id="feature-main-photo" src="hero_seoul_fountain.jpg" />
 
             <div class="map-feature-thumbs">
-              <button class="map-thumb is-active" type="button" data-full="hero_seoul_fountain.jpg">
-                <img src="hero_seoul_fountain.jpg" alt="Seoul detail 1" />
+              <button class="map-thumb is-active" data-full="hero_seoul_fountain.jpg">
+                <img src="hero_seoul_fountain.jpg" />
               </button>
 
-              <button class="map-thumb" type="button" data-full="hero_seoul_path.jpg">
-                <img src="hero_seoul_path.jpg" alt="Seoul detail 2" />
+              <button class="map-thumb" data-full="hero_seoul_path.jpg">
+                <img src="hero_seoul_path.jpg" />
               </button>
 
-              <button class="map-thumb" type="button" data-full="hero_seoul_gate.jpg">
-                <img src="hero_seoul_gate.jpg" alt="Seoul detail 3" />
+              <button class="map-thumb" data-full="hero_seoul_gate.jpg">
+                <img src="hero_seoul_gate.jpg" />
               </button>
             </div>
           </div>
         </div>
 
-        <!-- City grid -->
         <div class="map-city-grid">
           <article class="city-card">
             <h3 class="city-name">Hong Kong</h3>
-            <p class="city-tagline">Everyday streets &amp; foggy mornings.</p>
-            <p class="city-body">
-              Minibus lights, old shop signs and markets under flyovers. 
-              Hong Kong is my base and where many of my quiet stories begin.
-            </p>
+            <p class="city-tagline">Everyday streets &amp; markets.</p>
           </article>
 
           <article class="city-card">
             <h3 class="city-name">Seoul</h3>
-            <p class="city-tagline">Hills, alleys and small galleries.</p>
-            <p class="city-body">
-              Staircases, rooftops and side streets. 
-              I like walking when the city is just waking up or almost closing.
-            </p>
+            <p class="city-tagline">Hills &amp; alleys.</p>
           </article>
 
           <article class="city-card">
-            <h3 class="city-name">Tokyo / Kyoto</h3>
-            <p class="city-tagline">Trains, platforms &amp; seasonal light.</p>
-            <p class="city-body">
-              Commuter lines, temple courtyards and shadows on the ground – 
-              looking for rhythm in everyday movement.
-            </p>
+            <h3 class="city-name">Tokyo</h3>
+            <p class="city-tagline">Platforms &amp; shadows.</p>
           </article>
 
           <article class="city-card">
-            <h3 class="city-name">Future projects</h3>
-            <p class="city-tagline">Cities I hope to film in next.</p>
-            <div class="city-chips">
-              <span class="chip">Reykjavík · winter light</span>
-              <span class="chip">Paris · café windows</span>
-              <span class="chip">Taipei · night markets</span>
-            </div>
-            <p class="city-body">
-              Cities I’d love to explore through short films and photo essays
-              mixing personal stories with documentary details.
-            </p>
+            <h3 class="city-name">Future</h3>
+            <p class="city-tagline">Cities I hope to film in.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Photo switcher script -->
     <script>
+      // Featured photo switching
       document.addEventListener("DOMContentLoaded", function () {
         var main = document.getElementById("feature-main-photo");
         var thumbs = document.querySelectorAll(".map-thumb");
@@ -557,7 +413,6 @@
         thumbs.forEach(function (thumb) {
           thumb.addEventListener("click", function () {
             var fullSrc = thumb.getAttribute("data-full");
-
             main.src = fullSrc;
 
             thumbs.forEach(function (t) {
@@ -568,6 +423,7 @@
         });
       });
     </script>
+
   </main>
 
   <script src="map.js"></script>
