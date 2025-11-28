@@ -26,6 +26,52 @@
       padding: 20px;
       box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
     }
+
+    
+  /* nav 下方快捷鍵（同 map / interactive3d 一樣） */
+  .page-shortcuts {
+    max-width: 1100px;
+    margin: 10px auto 0;
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .shortcut-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .shortcut-pill {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(214, 211, 209, 0.9);
+    color: #6b7280;
+    text-decoration: none;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .shortcut-pill:hover {
+    background: #e0f2fe;
+    border-color: #60a5fa;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  .shortcut-pill.is-active {
+    background: #111827;
+    border-color: #111827;
+    color: #f9fafb;
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.35);
+  }
+
   </style>
 </head>
 
@@ -39,6 +85,15 @@
       <li><a href="interactive3d.html">3D</a></li>
     </ul>
   </nav>
+
+   
+  <div class="page-shortcuts">
+    <div class="shortcut-group">
+      <a href="timeline.html" class="shortcut-pill is-active">Timeline</a>
+      <a href="interactive3d.html" class="shortcut-pill">Data View</a>
+      <a href="map.html" class="shortcut-pill">Travel Map</a>
+    </div>
+  </div>
 
   <main class="page-wrapper">
     <h1 class="page-title">📈 Creative Growth Timeline</h1>
